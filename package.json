@@ -1,0 +1,17 @@
+{
+  "name": "@brinkninja/brink-types",
+  "version": "0.0.1",
+  "description": "Brink types for all projects",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.0.2"
+  },
+  "dependencies": {
+    "ethers": "^6.2.0"
+  }
+}
