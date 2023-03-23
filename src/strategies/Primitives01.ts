@@ -8,14 +8,14 @@ interface UnsignedTransferData {
   idsProof: IdsProof;
 }
 
-interface UnsignedMarketSwapData {
+export interface UnsignedMarketSwapData {
   recipient: string;
   tokenInIdsProof: IdsProof;
   tokenOutIdsProof: IdsProof;
   fillCall: Call;
 }
 
-interface UnsignedLimitSwapData {
+export interface UnsignedLimitSwapData {
   recipient: string;
   tokenInAmount: number;
   tokenInIdsProof: IdsProof;
