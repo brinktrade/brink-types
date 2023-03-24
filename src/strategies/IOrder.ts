@@ -3,19 +3,19 @@ import { IUint256Oracle } from "./IUint256Oracle";
 import { IdsProof, Token } from "./TokenHelper";
 import { UnsignedMarketSwapData, UnsignedLimitSwapData } from "./Primitives01";
 import { IPriceCurve } from "./IPriceCurve";
-
+import { BigNumberish } from "ethers";
 export interface IBitMap {
-  bitmapIndex: number;
-  bit: number
+  bitmapIndex: BigNumberish;
+  bit: BigNumberish
 }
 
 export interface IBlock {
-  blockNumber: number;
+  blockNumber: BigNumberish;
 }
 
 export interface IBlockElapsed {
   id: string, 
-  numberOfBlocksElapsed: number,
+  numberOfBlocksElapsed: BigNumberish,
 }
 
 export interface IRuns {
@@ -29,11 +29,11 @@ interface IBound {
 }
 
 export interface ILowerBound extends IBound {
-  lowerBound: number;
+  lowerBound: BigNumberish;
 }
 
 export interface IUpperBound extends IBound {
-  upperBound: number;
+  upperBound: BigNumberish;
 }
 
 export interface IStake {
@@ -49,7 +49,7 @@ export interface ITransfer {
   token: Token, 
   owner: string, 
   recipient: string, 
-  amount: number, 
+  amount: BigNumberish, 
   data: UnsignedTransferData
 }
 
@@ -59,17 +59,17 @@ interface IMarketSwap {
   owner: string, 
   tokenIn: Token, 
   tokenOut: Token, 
-  feePercent: number, 
-  feeMinTokenOut: number, 
+  feePercent: BigNumberish, 
+  feeMinTokenOut: BigNumberish, 
   data: UnsignedMarketSwapData
 }
 
 export interface IMarketSwapExactOutput extends IMarketSwap {
-  tokenOutAmount: number, 
+  tokenOutAmount: BigNumberish, 
 }
 
 export interface IMarketSwapExactInput extends IMarketSwap {
-  tokenInAmount: number, 
+  tokenInAmount: BigNumberish, 
 }
 
 export interface ILimitSwap {
@@ -77,7 +77,7 @@ export interface ILimitSwap {
   owner: string, 
   tokenIn: Token, 
   tokenOut: Token, 
-  tokenInAmount: number, 
+  tokenInAmount: BigNumberish, 
   priceCurve: IPriceCurve, 
   priceCurveParams: string, 
   data: UnsignedLimitSwapData

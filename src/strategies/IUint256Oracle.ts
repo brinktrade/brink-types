@@ -1,5 +1,5 @@
-// SPDX-License-Identifier: GPL-3.0-or-later
+import { BigNumberish } from "ethers";
 
 export interface IUint256Oracle {
-  getUint256(params: Uint8Array): Promise<bigint>;
+  getUint256(params: Uint8Array): Promise<BigNumberish>;
 }
