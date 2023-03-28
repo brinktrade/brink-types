@@ -1,8 +1,8 @@
 
-import { IUint256Oracle } from "./IUint256Oracle";
-import { IdsProof, Token } from "./TokenHelper";
-import { UnsignedMarketSwapData, UnsignedLimitSwapData } from "./Primitives01";
-import { IPriceCurve } from "./IPriceCurve";
+import { Uint256Oracle } from "./Uint256Oracle";
+import { IdsProof, Token } from "./smartContracts/TokenHelper";
+import { UnsignedMarketSwapData, UnsignedLimitSwapData } from "./smartContracts/Primitives01";
+import { IPriceCurve } from "./smartContracts/IPriceCurve";
 import { BigNumberish } from "ethers";
 export interface IBitMap {
   bitmapIndex: BigNumberish;
@@ -24,7 +24,7 @@ export interface IRuns {
 }
 
 interface IBound {
-  uint256Oracle: IUint256Oracle, 
+  uint256Oracle: Uint256Oracle, 
   params: string, 
 }
 
@@ -54,7 +54,7 @@ export interface ITransfer {
 }
 
 interface IMarketSwap {
-  priceOracle: IUint256Oracle, 
+  priceOracle: Uint256Oracle, 
   priceOracleParams: string, 
   owner: string, 
   tokenIn: Token, 
@@ -95,6 +95,6 @@ export type createSeaportListing = {
   id: string
 }
 
-export type Order =  IRequireLimitSwap | ILimitSwap | IMarketSwapExactInput | IMarketSwapExactOutput | ITransfer | UnsignedTransferData | IStake | IUpperBound | ILowerBound | IRuns |IBlockElapsed | IBlock | IBitMap
+export type OrderParam =  IRequireLimitSwap | ILimitSwap | IMarketSwapExactInput | IMarketSwapExactOutput | ITransfer | UnsignedTransferData | IStake | IUpperBound | ILowerBound | IRuns |IBlockElapsed | IBlock | IBitMap
 
-export type Orders = Order[]
+export type Orders = OrderParam[]

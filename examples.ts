@@ -1,15 +1,14 @@
 
 import { BigNumberish } from 'ethers';
-import { Orders, Order, IBitMap, UnsignedTransferData } from './src/strategies/IOrder'
-import { IPriceCurve } from './src/strategies/IPriceCurve';
-import { Primitives01, UnsignedLimitSwapData, UnsignedMarketSwapData } from './src/strategies/Primitives01';
-import { Token } from './src/strategies/TokenHelper';
+import { OrderParam, IBitMap, UnsignedTransferData } from './src/strategies/IOrder'
+import { IPriceCurve } from './src/strategies/smartContracts/IPriceCurve';
+import { Primitives01, UnsignedLimitSwapData, UnsignedMarketSwapData } from './src/strategies/smartContracts/Primitives01';
+import { Token } from './src/strategies/smartContracts/TokenHelper';
 
 export class Primitives implements Primitives01 {
   constructor() {}
 
-  create({type, order}: ({ order: Order, type: string})): Promise<unknown> {
-
+  create({type, order}: ({ order: OrderParam, type: string})): Promise<unknown> {
     // As example of use. Better to determine dynamically the order type.
     switch (type) {
       case 'useBit':

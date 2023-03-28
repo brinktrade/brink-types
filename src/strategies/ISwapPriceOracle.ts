@@ -1,6 +1,3 @@
-import { BigNumberish } from "ethers";
+import { AddressLike } from "ethers";
 
-// SPDX-License-Identifier: GPL-3.0-or-later
-export interface ISwapPriceOracle {
-  getSwapPrice(): Promise<BigNumberish>;
-}
+export type ISwapPriceOracle = AddressLike;

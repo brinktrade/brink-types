@@ -1,6 +1,5 @@
 import { BigNumberish } from "ethers";
 import { IPriceCurve } from "./IPriceCurve";
-import { IUint256Oracle } from "./IUint256Oracle";
 import { Call } from "./StrategyBase";
 import { IdsProof, Token } from "./TokenHelper";
 
