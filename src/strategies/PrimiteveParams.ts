@@ -4,6 +4,7 @@ import { IdsProof, Token } from "./smartContracts/TokenHelper";
 import { UnsignedMarketSwapData, UnsignedLimitSwapData } from "./smartContracts/Primitives01";
 import { IPriceCurve } from "./smartContracts/IPriceCurve";
 import { BigNumberish } from "ethers";
+
 export interface IBitMap {
   bitmapIndex: BigNumberish;
   bit: BigNumberish
@@ -95,6 +96,4 @@ export type createSeaportListing = {
   id: string
 }
 
-export type OrderParam =  IRequireLimitSwap | ILimitSwap | IMarketSwapExactInput | IMarketSwapExactOutput | ITransfer | UnsignedTransferData | IStake | IUpperBound | ILowerBound | IRuns |IBlockElapsed | IBlock | IBitMap
-
-export type Orders = OrderParam[]
+export type PrimitiveParam =  IRequireLimitSwap | ILimitSwap | IMarketSwapExactInput | IMarketSwapExactOutput | ITransfer | UnsignedTransferData | IStake | IUpperBound | ILowerBound | IRuns |IBlockElapsed | IBlock | IBitMap

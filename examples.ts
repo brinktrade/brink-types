@@ -1,104 +1,75 @@
+import { StrategyDbParam } from "./src/strategies/db/StrategyParams";
 
-import { BigNumberish } from 'ethers';
-import { OrderParam, IBitMap, UnsignedTransferData } from './src/strategies/IOrder'
-import { IPriceCurve } from './src/strategies/smartContracts/IPriceCurve';
-import { Primitives01, UnsignedLimitSwapData, UnsignedMarketSwapData } from './src/strategies/smartContracts/Primitives01';
-import { Token } from './src/strategies/smartContracts/TokenHelper';
+const USDC_address = '0x111'
+const WETH_address = '0x222'
+const p = 1_000
+const oracle_USDC_ETH =  '0x333'
+const ownerAddress =  '0x444'
 
-export class Primitives implements Primitives01 {
-  constructor() {}
+const stopLossPrimitives = [
+  {  
+    data: 'replay bit test data',
+    requiresUnsigendCall: true,
+    orderIndex: 1,
+    functionName: 'replay bit testFunction',
+    functionSignature: 'replay bit testSignature',
+    functionSignedParams: {                    
+      bitmapIndex: 0,
+      bit: 1
+  }},
+  {  
+    data: 'expiry test data',
+    requiresUnsigendCall: true,
+    orderIndex: 1,
+    functionName: 'expiry testFunction',
+    functionSignature: 'expiry testSignature',
+    functionSignedParams: {     
+      blockNumber: 16802111
+  }},
+  {  
+    data: 'UniV3TWAP test data',
+    requiresUnsigendCall: true,
+    orderIndex: 1,
+    functionName: 'UniV3TWAP testFunction',
+    functionSignature: 'UniV3TWAP testSignature',
+    functionSignedParams: {  
+      oracle: { // UniV3TWAP
+        baseToken: USDC_address,
+        quoteToken: WETH_address,
+        time: 1000,
+        feePool: 500
+      },
+      price: p
+  }},
+  {  
+    data: 'market swap test data',
+    requiresUnsigendCall: true,
+    orderIndex: 1,
+    functionName: 'market swap testFunction',
+    functionSignature: 'market swap testSignature',
+    functionSignedParams: {      
+      oracle: oracle_USDC_ETH,
+      owner: ownerAddress,
+      tokenIn: USDC_address,
+      tokenOut: WETH_address,
+      tokenInAmount: 3000_000000, // 3k USDC
+      feePercent: 1_0000, // 1% fee
+      feeMin: 0
+  }},
+]
 
-  create({type, order}: ({ order: OrderParam, type: string})): Promise<unknown> {
-    // As example of use. Better to determine dynamically the order type.
-    switch (type) {
-      case 'useBit':
-        return this.useBit((order as IBitMap).bitmapIndex, (order as IBitMap).bit);    
-      default:
-        throw new Error('Invalid order type');
-    }
-  }
-
-  requireBitNotUsed(bitmapIndex: BigNumberish, bit: BigNumberish): Promise<unknown> {
-    // Validate bit and bitmapIndex are valid
-    throw new Error('Method not implemented.');
-  }
-  requireBitUsed(bitmapIndex: BigNumberish, bit: BigNumberish): Promise<unknown> {
-    // Validate bit and bitmapIndex are valid
-    throw new Error('Method not implemented.');
-  }
-  useBit(bitmapIndex: BigNumberish, bit: BigNumberish): Promise<unknown> {
-    // Validate bit and bitmapIndex are valid
-    throw new Error('Method not implemented.');
-    // return { type: , data }
-  }
-  requireBlockMined(blockNumber: BigNumberish): Promise<unknown> {
-    // Validate blockNumber is valid
-    throw new Error('Method not implemented.');
-  }
-  requireBlockNotMined(blockNumber: BigNumberish): Promise<unknown> {
-    // Validate blockNumber is valid
-    throw new Error('Method not implemented.');
-  }
-  maxRuns(id: string, numberRuns: BigNumberish): Promise<unknown> {
-    throw new Error('Method not implemented.');
-  }
-  requireBlocksElapsed(id: string, BigNumberishOfBlocksElapsed: BigNumberish): Promise<unknown> {
-    throw new Error('Method not implemented.');
-  }
-  requireUint256LowerBound(uint256Oracle: string, params: string, lowerBound: BigNumberish): Promise<unknown> {
-    throw new Error('Method not implemented.');
-  }
-  requireUint256UpperBound(uint256Oracle: string, params: string, upperBound: BigNumberish): Promise<unknown> {
-    throw new Error('Method not implemented.');
-  }
-  requireStake(data: UnsignedStakeProofData): Promise<unknown> {
-    throw new Error('Method not implemented.');
-  }
-  transfer(token: Token, owner: string, recipient: string, amount: BigNumberish, data: UnsignedTransferData): Promise<unknown> {
-    throw new Error('Method not implemented.');
-  }
-  marketSwapExactInput(priceOracle: string, priceOracleParams: string, owner: string, tokenIn: Token, tokenOut: Token, tokenInAmount: BigNumberish, feePercent: BigNumberish, feeMinTokenOut: BigNumberish, data: UnsignedMarketSwapData): Promise<unknown> {
-    throw new Error('Method not implemented.');
-  }
-  marketSwapExactOutput(priceOracle: string, priceOracleParams: string, owner: string, tokenIn: Token, tokenOut: Token, tokenOutAmount: BigNumberish, feePercent: BigNumberish, feeMinTokenIn: BigNumberish, data: UnsignedMarketSwapData): Promise<unknown> {
-    throw new Error('Method not implemented.');
-  }
-  limitSwap(id: string, owner: string, tokenIn: Token, tokenOut: Token, tokenInAmount: BigNumberish, priceCurve: IPriceCurve, priceCurveParams: string, data: UnsignedLimitSwapData): Promise<unknown> {
-    throw new Error('Method not implemented.');
-  }
-  requireLimitSwapOpen(id: string): Promise<unknown> {
-    throw new Error('Method not implemented.');
-  }
-  requireLimitSwapFilled(id: string): Promise<unknown> {
-    throw new Error('Method not implemented.');
-  }
-  invertLimitSwapFills(swap0: string, swap1: string): Promise<unknown> {
-    throw new Error('Method not implemented.');
-  }
-  bindLimitSwapFills(swapIds: string[]): Promise<unknown> {
-    throw new Error('Method not implemented.');
-  }
-  createSeaportListing(id: string): Promise<unknown> {
-    throw new Error('Method not implemented.');
-  }
+const strategyParm: StrategyDbParam = { 
+  accountAddress: '0xfdc57bf6ea6a3bfd1d53167e4f98dd4ccf967e9f', 
+  signature: '0x0', 
+  signerAddress: '0x3bc8dE4CF6c075Fb8e24A954EC1D1B12bDcbF336', 
+  strategyHash: '0x123', 
+  chainId: '1', 
+  messageCallType: 'metaDelegateCall', 
+  primitiveTarget: 'primitiveTarget',
+  sigType: 'EIP712',
+  orders: [
+    { primitives: stopLossPrimitives }
+  ]
 }
 
-const primitives = new Primitives();
-
-const replayBit =  primitives.useBit('1', '1');
-
-const expiry = primitives.requireBlockNotMined('16802111')
-
-const PriceOracleCheck = primitives.requireUint256LowerBound('1234', '1234', '1234');
-
-const marketSwap = primitives.marketSwapExactInput(
-  'priceOracle',
-  'priceOracleParams',
-  'owner',
-  'tokenIn',
-  'tokenOut',
-  'tokenInAmount',
-  'feePercent',
-  'feeMinTokenOut',
-  'data',
-)
+// db.Strategies.createOrSelect(strategyParm) -> Retunrn Strategy id (INT, autoincrement)
