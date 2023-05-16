@@ -1,17 +1,14 @@
 {
-  "name": "@brinkninja/brink-types",
-  "version": "0.0.1",
-  "description": "Brink types for all projects",
-  "main": "./dist/index.js",
+  "name": "@brinkninja/types",
+  "version": "0.1.0",
+  "description": "TypeScript types for Brink",
+  "license": "GPL-3.0-or-later",
+  "main": "dist/Types.js",
+  "types": "dist/Types.d.ts",
   "scripts": {
     "build": "tsc"
   },
-  "author": "",
-  "license": "MIT",
-  "devDependencies": {
-    "typescript": "^5.0.2"
-  },
   "dependencies": {
-    "ethers": "^6.2.0"
+    "typescript": "^5.0.4"
   }
 }
