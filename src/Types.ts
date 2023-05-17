@@ -198,6 +198,7 @@ export type RouteSegment = {
 	tokenOut: TokenJSON
 	tokenInAmount: bigint
 	tokenOutAmount: bigint
+  gas: bigint
 }
 
 export type TokenValue = {[key: string]: bigint}
