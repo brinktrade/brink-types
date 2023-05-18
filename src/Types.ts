@@ -406,6 +406,7 @@ export interface CreateStopMarketExactOutputStrategyRequest extends StrategyRequ
   expiry: bigint
 }
 
+export type StrategyType = 'stop_market' | 'stop_limit' | 'limit' | 'market'
 export type StrategyStatus = 'open' | 'filled' | 'cancelled' | 'expired'
 export type StrategySort =
   'created_time' |
@@ -441,5 +442,8 @@ export type MinedTransaction = {
 }
 
 export interface StrategyResponse extends StrategyDataResponse {
+  strategy: StrategyJSON
+  strategyType: StrategyType
+  tokens: TokenJSON[]
   minedTransactions: MinedTransaction[]
 }
