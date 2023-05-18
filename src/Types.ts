@@ -447,3 +447,8 @@ export interface StrategyResponse extends StrategyDataResponse {
   tokens: TokenJSON[]
   minedTransactions: MinedTransaction[]
 }
+
+export interface StrategiesResponse {
+  count: number
+  strategies: StrategyResponse[]
+}
