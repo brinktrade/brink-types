@@ -406,7 +406,7 @@ export interface CreateStopMarketExactOutputStrategyRequest extends StrategyRequ
   expiry: bigint
 }
 
-export type StrategyType = 'stop_market' | 'stop_limit' | 'limit' | 'market'
+export type StrategyType = 'stop_market' | 'stop_limit' | 'limit' | 'market' | 'custom'
 export type StrategyStatus = 'open' | 'filled' | 'cancelled' | 'expired'
 export type StrategySort =
   'created_time' |
