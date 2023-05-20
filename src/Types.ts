@@ -248,7 +248,7 @@ export type StrategyResponse = {
 
 export type SwapRequestInclude = 'required_transactions' | 'estimates' | 'routes' | 'bytes'
 export type StrategyRequestInclude = 'required_transactions' | 'estimates' | 'routes' | 'cancel' | 'eip712_data' | 'eip1271_data'
-export type StoredStrategyRequestsInclude = 'mined_transactions' | StrategyRequestInclude
+export type SignedStrategyRequestsInclude = 'events' | StrategyRequestInclude
 
 interface SwapResponse {
   requiredTransactions?: (ApprovalResponse | TransactionResponse)[]
@@ -434,7 +434,7 @@ export type StrategySort =
   'filled_block'
 export type StrategySortBy = 'asc' | 'desc'
 
-export interface StrategiesRequest {
+export interface SignedStrategiesRequest {
   limit?: number
   offset?: number
   signer?: string
@@ -445,7 +445,7 @@ export interface StrategiesRequest {
   status?: StrategyStatus[]
   sort?: StrategySort
   sortBy?: StrategySortBy
-  include?: StoredStrategyRequestsInclude[]
+  include?: SignedStrategyRequestsInclude[]
 }
 
 export type MinedTransaction = {
@@ -458,6 +458,15 @@ export type MinedTransaction = {
 	params?: ContractCallParam[]
 }
 
+export type StrategyEventType = 'create' | 'swap' | 'expire' | 'cancel' | 'unknown'
+
+export interface StrategyEventResponse {
+  eventType: StrategyEventType
+  success: boolean
+  orderIndex?: number
+  transaction?: MinedTransaction
+}
+
 export interface SignedStrategyResponse extends StrategyMetadata {
   strategy: StrategyResponse
   strategyType: StrategyType
@@ -467,7 +476,7 @@ export interface SignedStrategyResponse extends StrategyMetadata {
   chainId: bigint
   strategyContract: string
   tokens: TokenJSON[]
-  minedTransactions: MinedTransaction[]
+  events?: StrategyEventResponse[]
 }
 
 export interface SignedStrategiesResponse {
