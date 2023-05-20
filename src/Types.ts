@@ -377,6 +377,7 @@ export type StrategyOrderSwapResponse = (
 )
 
 export interface StrategyMetadata {
+  hash: string
   swaps?: StrategyOrderSwapResponse[]
   requiredTransactions?: (ApprovalResponse | TransactionResponse)[]
   cancel?: TransactionResponse
@@ -482,4 +483,17 @@ export interface SignedStrategyResponse extends StrategyMetadata {
 export interface SignedStrategiesResponse {
   count: number
   strategies: SignedStrategyResponse[]
+}
+
+export interface SubmitStrategyRequest {
+  strategy: StrategyJSON
+  signer: string
+  signature: string
+  signatureType?: SignatureType
+  strategyContract?: string
+  chainId?: bigint
+}
+
+export interface SubmitStrategyResponse {
+  hash: string
 }
