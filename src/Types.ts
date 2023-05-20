@@ -229,6 +229,23 @@ export interface LimitSwapInputEstimates {
   price: number
 }
 
+export type PrimitiveResponse = {
+  functionName: PrimitiveFunctionName
+  params: Record<string, PrimitiveParamValue>
+  requiresUnsignedCall: boolean
+}
+
+export type OrderResponse = {
+  primitives: PrimitiveResponse[]
+}
+
+export type StrategyResponse = {
+  orders: OrderResponse[]
+  beforeCalls: any[]
+  afterCalls: any[]
+  primitivesContract: string
+}
+
 export type SwapRequestInclude = 'required_transactions' | 'estimates' | 'routes' | 'bytes'
 export type StrategyRequestInclude = 'required_transactions' | 'estimates' | 'routes' | 'cancel' | 'eip712_data' | 'eip1271_data'
 export type StoredStrategyRequestsInclude = 'mined_transactions' | StrategyRequestInclude
@@ -359,7 +376,7 @@ export type StrategyOrderSwapResponse = (
   LimitSwapExactOutputOrderResponse
 )
 
-export interface StrategyDataResponse {
+export interface StrategyMetadata {
   swaps?: StrategyOrderSwapResponse[]
   requiredTransactions?: (ApprovalResponse | TransactionResponse)[]
   cancel?: TransactionResponse
@@ -378,8 +395,8 @@ export interface CreateStrategyRequest extends StrategyRequestBase {
 	strategy: StrategyJSON
 }
 
-export interface CreateStrategyResponse extends StrategyDataResponse {
-  strategy: StrategyJSON
+export interface CreateStrategyResponse extends StrategyMetadata {
+  strategy: StrategyResponse
 }
 
 export interface CreateStopMarketExactInputStrategyRequest extends StrategyRequestBase {
@@ -441,14 +458,19 @@ export type MinedTransaction = {
 	params?: ContractCallParam[]
 }
 
-export interface StrategyResponse extends StrategyDataResponse {
-  strategy: StrategyJSON
+export interface SignedStrategyResponse extends StrategyMetadata {
+  strategy: StrategyResponse
   strategyType: StrategyType
+  signer: string
+  signature: string
+  signatureType: SignatureType
+  chainId: bigint
+  strategyContract: string
   tokens: TokenJSON[]
   minedTransactions: MinedTransaction[]
 }
 
-export interface StrategiesResponse {
+export interface SignedStrategiesResponse {
   count: number
-  strategies: StrategyResponse[]
+  strategies: SignedStrategyResponse[]
 }
