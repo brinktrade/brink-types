@@ -22,6 +22,14 @@ export enum TokenStandard {
   ETH = 3
 }
 
+export type TokenArgs = {
+  addr: string
+  standard: TokenStandard
+  idsMerkleRoot: string
+  id: BigIntish
+  disallowFlagged: boolean
+}
+
 export type TokenStruct = {
   addr: string
   standard: TokenStandard
@@ -36,6 +44,15 @@ export type TokenJSON = {
   idsMerkleRoot: string
   id: string
   disallowFlagged: boolean
+}
+
+export type IdsProofArgs = {
+  ids: BigIntish[]
+  merkleProof_hashes: string[]
+  merkleProof_flags: boolean[]
+  statusProof_lastTransferTimes: BigIntish[]
+  statusProof_timestamps: BigIntish[]
+  statusProof_signatures: string[];
 }
 
 export type IdsProofStruct = {
