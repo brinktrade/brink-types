@@ -23,7 +23,7 @@ export enum TokenStandard {
 }
 
 export type TokenArgs = {
-  addr: string
+  address: string
   standard: TokenStandard
   idsMerkleRoot: string
   id: BigIntish
