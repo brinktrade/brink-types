@@ -24,10 +24,10 @@ export enum TokenStandard {
 
 export type TokenArgs = {
   address: string
-  standard: TokenStandard
-  idsMerkleRoot: string
-  id: BigIntish
-  disallowFlagged: boolean
+  standard?: TokenStandard
+  idsMerkleRoot?: string
+  id?: BigIntish
+  disallowFlagged?: boolean
 }
 
 export type TokenStruct = {
