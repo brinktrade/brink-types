@@ -4,6 +4,8 @@ export type RpcMethodCallParam = number | boolean | string
 
 export type PrimitiveParamValue = ContractCallParam | OracleJSON | TokenJSON
 
+export type PrimitiveParamJSON = boolean | string | number | SignatureTypeEnum | IdsProofJSON | OracleJSON | TokenJSON
+
 export type BigIntish = bigint | string | number
 
 export enum SignatureTypeEnum {
@@ -32,7 +34,7 @@ export type TokenJSON = {
   address: string
   standard: TokenStandard
   idsMerkleRoot: string
-  id: bigint
+  id: string
   disallowFlagged: boolean
 }
 
@@ -46,11 +48,11 @@ export type IdsProofStruct = {
 }
 
 export type IdsProofJSON = {
-  ids: bigint[]
+  ids: string[]
   merkleProof_hashes: string[]
   merkleProof_flags: boolean[]
-  statusProof_lastTransferTimes: bigint[]
-  statusProof_timestamps: bigint[]
+  statusProof_lastTransferTimes: string[]
+  statusProof_timestamps: string[]
   statusProof_signatures: string[];
 }
 
@@ -66,7 +68,7 @@ export type PrimitiveType =
 
 export type PrimitiveJSON = {
   functionName: PrimitiveFunctionName
-  params: Record<string, PrimitiveParamValue>
+  params: Record<string, PrimitiveParamJSON>
   data?: string
   requiresUnsignedCall?: boolean
 }
