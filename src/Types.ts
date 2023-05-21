@@ -66,24 +66,44 @@ export type PrimitiveType =
   'swap' |
   'require'
 
-export type PrimitiveJSON = {
+export type PrimitiveObject = {
   functionName: PrimitiveFunctionName
-  params: Record<string, PrimitiveParamJSON>
+  params: Record<string, PrimitiveParamValue>
   data?: string
   requiresUnsignedCall?: boolean
 }
 
-export type OrderJSON = {
-  primitives: PrimitiveJSON[]
+export type OrderObject = {
+  primitives: PrimitiveObject[]
   data?: string
 }
 
-export type StrategyJSON = {
-  orders: OrderJSON[]
+export type StrategyObject = {
+  orders: OrderObject[]
   beforeCalls?: any[]
   afterCalls?: any[]
   primitivesContract?: string,
   data?: string
+}
+
+export type PrimitiveJSON = {
+  functionName: PrimitiveFunctionName
+  params: Record<string, PrimitiveParamJSON>
+  data: string
+  requiresUnsignedCall: boolean
+}
+
+export type OrderJSON = {
+  primitives: PrimitiveJSON[]
+  data: string
+}
+
+export type StrategyJSON = {
+  orders: OrderJSON[]
+  beforeCalls: any[]
+  afterCalls: any[]
+  primitivesContract: string,
+  data: string
 }
 
 export type SignedStrategyArgs = {
