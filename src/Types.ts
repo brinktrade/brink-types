@@ -75,7 +75,6 @@ export type PrimitiveArgs = {
 
 export type OrderArgs = {
   primitives: PrimitiveArgs[]
-  data?: string
 }
 
 export type StrategyArgs = {
