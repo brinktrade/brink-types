@@ -385,13 +385,6 @@ export interface UseBitResponse extends RequireCheckResponse {
   bitUsed: boolean
 }
 
-export interface StrategyDataRequest {
-  strategy: StrategyJSON
-  signer: string
-  chainId?: bigint
-  include?: StrategyRequestInclude[]
-}
-
 export interface MarketSwapExactInputOrderResponse extends MarketSwapExactInputResponse {
   orderIndex: number
 }
@@ -406,6 +399,13 @@ export interface LimitSwapExactInputOrderResponse extends LimitSwapExactInputRes
 
 export interface LimitSwapExactOutputOrderResponse extends LimitSwapExactOutputResponse {
   orderIndex: number
+}
+
+interface StrategyRequestBase {
+  signer?: string
+  chainId?: bigint
+  signatureType?: SignatureType
+  include?: StrategyRequestInclude[]
 }
 
 export type StrategyOrderSwapResponse = (
@@ -424,22 +424,15 @@ export interface StrategyMetadata {
   eip1271Data?: {}
 }
 
-interface StrategyRequestBase {
-  signer?: string
-  chainId?: bigint
-  signatureType?: SignatureType
-  include?: StrategyRequestInclude[]
+export interface StrategyDataRequest extends StrategyRequestBase {
+  strategy: StrategyJSON
 }
 
-export interface CreateStrategyRequest extends StrategyRequestBase {
-	strategy: StrategyJSON
-}
-
-export interface CreateStrategyResponse extends StrategyMetadata {
+export interface StrategyDataResponse extends StrategyMetadata {
   strategy: StrategyResponse
 }
 
-export interface CreateStopMarketExactInputStrategyRequest extends StrategyRequestBase {
+export interface StopMarketExactInputStrategyRequest extends StrategyRequestBase {
 	tokenIn: TokenJSON
   tokenOut: TokenJSON
   tokenInAmount: bigint
@@ -451,7 +444,7 @@ export interface CreateStopMarketExactInputStrategyRequest extends StrategyReque
   expiry: bigint
 }
 
-export interface CreateStopMarketExactOutputStrategyRequest extends StrategyRequestBase {
+export interface StopMarketExactOutputStrategyRequest extends StrategyRequestBase {
 	tokenIn: TokenJSON
   tokenOut: TokenJSON
   tokenOutAmount: bigint
