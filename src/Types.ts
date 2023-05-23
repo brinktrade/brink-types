@@ -296,11 +296,11 @@ interface SwapResponse {
 }
 
 export interface MarketSwapExactInputRequest {
-	tokenIn: TokenJSON
-	tokenOut: TokenJSON
-  tokenInAmount: bigint
-  feePercent: bigint
-  feeMinTokenOut: bigint
+	tokenIn: TokenArgs
+	tokenOut: TokenArgs
+  tokenInAmount: BigIntish
+  feePercent: BigIntish
+  feeMinTokenOut: BigIntish
   signer?: string
   include?: SwapRequestInclude[]
 }
@@ -310,11 +310,11 @@ export interface MarketSwapExactInputResponse extends SwapResponse {
 }
 
 export interface MarketSwapExactOutputRequest {
-	tokenIn: TokenJSON
-	tokenOut: TokenJSON
-  tokenInAmount: bigint
-  feePercent: bigint
-  feeMinTokenOut: bigint
+	tokenIn: TokenArgs
+	tokenOut: TokenArgs
+  tokenInAmount: BigIntish
+  feePercent: BigIntish
+  feeMinTokenOut: BigIntish
   signer?: string
   include?: SwapRequestInclude[]
 }
@@ -324,9 +324,9 @@ export interface MarketSwapExactOutputResponse extends SwapResponse {
 }
 
 export interface LimitSwapExactInputRequest {
-	tokenIn: TokenJSON
-	tokenOut: TokenJSON
-  tokenInAmount: bigint
+	tokenIn: TokenArgs
+	tokenOut: TokenArgs
+  tokenInAmount: BigIntish
   priceCurve: OracleJSON
   signer: string
   include?: SwapRequestInclude[]
@@ -337,9 +337,9 @@ export interface LimitSwapExactInputResponse extends SwapResponse {
 }
 
 export interface LimitSwapExactOutputRequest {
-	tokenIn: TokenJSON
-	tokenOut: TokenJSON
-  tokenOutAmount: bigint
+	tokenIn: TokenArgs
+	tokenOut: TokenArgs
+  tokenOutAmount: BigIntish
   priceCurve: OracleJSON
   signer: string
   include?: SwapRequestInclude[]
@@ -359,7 +359,7 @@ export interface RequireCheckResponse {
 }
 
 export interface RequireBlockNotMinedRequest extends RequireCheckRequest {
-  blockNumber: bigint
+  blockNumber: BigIntish
 }
 
 export interface RequireBlockNotMinedResponse extends RequireCheckResponse {
@@ -368,7 +368,7 @@ export interface RequireBlockNotMinedResponse extends RequireCheckResponse {
 
 export interface RequireUint256LowerBoundRequest extends RequireCheckRequest {
   oracle: OracleJSON
-  lowerBound: bigint
+  lowerBound: BigIntish
 }
 
 export interface RequireUint256LowerBoundResponse extends RequireCheckResponse {
@@ -377,8 +377,8 @@ export interface RequireUint256LowerBoundResponse extends RequireCheckResponse {
 
 export interface UseBitRequest extends RequireCheckRequest {
   signer: string
-  bitmapIndex: number
-  bit: number
+  bitmapIndex: BigIntish
+  bit: BigIntish
 }
 
 export interface UseBitResponse extends RequireCheckResponse {
@@ -403,7 +403,7 @@ export interface LimitSwapExactOutputOrderResponse extends LimitSwapExactOutputR
 
 interface StrategyRequestBase {
   signer?: string
-  chainId?: bigint
+  chainId?: BigIntish
   signatureType?: SignatureType
   include?: StrategyRequestInclude[]
 }
@@ -425,7 +425,7 @@ export interface StrategyMetadata {
 }
 
 export interface StrategyDataRequest extends StrategyRequestBase {
-  strategy: StrategyJSON
+  strategy: StrategyArgs
 }
 
 export interface StrategyDataResponse extends StrategyMetadata {
@@ -433,27 +433,27 @@ export interface StrategyDataResponse extends StrategyMetadata {
 }
 
 export interface StopMarketExactInputStrategyRequest extends StrategyRequestBase {
-	tokenIn: TokenJSON
-  tokenOut: TokenJSON
-  tokenInAmount: bigint
-  triggerPrice: bigint
-  feePercent: bigint
-  feeMinTokenOut: bigint
-	bitmapIndex: bigint
-  bit: bigint
-  expiry: bigint
+	tokenIn: TokenArgs
+  tokenOut: TokenArgs
+  tokenInAmount: BigIntish
+  triggerPrice: BigIntish
+  feePercent: BigIntish
+  feeMinTokenOut: BigIntish
+	bitmapIndex: BigIntish
+  bit: BigIntish
+  expiry: BigIntish
 }
 
 export interface StopMarketExactOutputStrategyRequest extends StrategyRequestBase {
-	tokenIn: TokenJSON
-  tokenOut: TokenJSON
-  tokenOutAmount: bigint
-  triggerPrice: bigint
-  feePercent: bigint
-  feeMinTokenIn: bigint
-	bitmapIndex: bigint
-  bit: bigint
-  expiry: bigint
+	tokenIn: TokenArgs
+  tokenOut: TokenArgs
+  tokenOutAmount: BigIntish
+  triggerPrice: BigIntish
+  feePercent: BigIntish
+  feeMinTokenIn: BigIntish
+	bitmapIndex: BigIntish
+  bit: BigIntish
+  expiry: BigIntish
 }
 
 export type StrategyType = 'stop_market' | 'stop_limit' | 'limit' | 'market' | 'custom'
@@ -473,7 +473,7 @@ export interface SignedStrategiesRequest {
   signer?: string
   hash?: string
   primitives?: PrimitiveFunctionName[]
-  tokens?: TokenJSON[]
+  tokens?: TokenArgs[]
   signatureType?: SignatureType[]
   status?: StrategyStatus[]
   sort?: StrategySort
@@ -518,12 +518,12 @@ export interface SignedStrategiesResponse {
 }
 
 export interface SubmitStrategyRequest {
-  strategy: StrategyJSON
+  strategy: StrategyArgs
   signer: string
   signature: string
   signatureType?: SignatureType
   strategyContract?: string
-  chainId?: bigint
+  chainId?: BigIntish
 }
 
 export interface SubmitStrategyResponse {
