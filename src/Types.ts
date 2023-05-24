@@ -501,6 +501,7 @@ export interface StrategyEventResponse {
 }
 
 export interface SignedStrategyResponse extends StrategyMetadata {
+  createdAt: string
   strategy: StrategyResponse
   strategyType: StrategyType
   signer: string
