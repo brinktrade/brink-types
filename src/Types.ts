@@ -73,6 +73,11 @@ export type IdsProofJSON = {
   statusProof_signatures: string[];
 }
 
+export type TokenAmount = {
+  token: TokenJSON
+  amount: string
+}
+
 export type PrimitiveFunctionName = 
   'useBit' |
   'marketSwapExactInput' |
