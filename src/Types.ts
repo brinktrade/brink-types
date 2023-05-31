@@ -227,7 +227,8 @@ export interface TransactionResponse extends TransactionData {
 }
 
 export interface ApprovalResponse {
-  approvalContract: string
+  owner: string,
+  spender: string
   token: TokenJSON
   requiredAllowance: bigint
   currentAllowance: bigint
