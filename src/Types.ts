@@ -191,7 +191,7 @@ export const invalidReasonMessages = {
 export type TransactionData = {
   to: string,
   data: string,
-  value: bigint,
+  value: string,
 }
 
 export type CallData = {
@@ -230,8 +230,8 @@ export interface ApprovalResponse {
   owner: string,
   spender: string
   token: TokenJSON
-  requiredAllowance: bigint
-  currentAllowance: bigint
+  requiredAllowance: string
+  currentAllowance: string
 	minTx?: TransactionResponse
   maxTx?: TransactionResponse
 }
@@ -241,12 +241,12 @@ export type RouteSegment = {
 	data: string
 	tokenIn: TokenJSON
 	tokenOut: TokenJSON
-	tokenInAmount: bigint
-	tokenOutAmount: bigint
-  gas: bigint
+	tokenInAmount: string
+	tokenOutAmount: string
+  gas: string
 }
 
-export type TokenValue = {[key: string]: bigint}
+export type TokenValue = {[key: string]: string}
 
 export interface MarketSwapOutputEstimates {
 	cost: TokenValue
@@ -369,7 +369,7 @@ export interface RequireBlockNotMinedRequest extends RequireCheckRequest {
 }
 
 export interface RequireBlockNotMinedResponse extends RequireCheckResponse {
-  currentBlock: bigint
+  currentBlock: string
 }
 
 export interface RequireUint256LowerBoundRequest extends RequireCheckRequest {
@@ -378,7 +378,7 @@ export interface RequireUint256LowerBoundRequest extends RequireCheckRequest {
 }
 
 export interface RequireUint256LowerBoundResponse extends RequireCheckResponse {
-  oracleValue: bigint
+  oracleValue: string
 }
 
 export interface UseBitRequest extends RequireCheckRequest {
@@ -489,8 +489,8 @@ export interface SignedStrategiesRequest {
 
 export type MinedTransaction = {
   hash: string
-  blockNumber: bigint
-  blockTimestamp: bigint
+  blockNumber: string
+  blockTimestamp: string
   success: boolean
   data: string
   functionSignature?: string
@@ -514,7 +514,7 @@ export interface SignedStrategyResponse extends StrategyMetadata {
   signer: string
   signature: string
   signatureType: SignatureType
-  chainId: bigint
+  chainId: string
   strategyContract: string
   tokens: TokenJSON[]
   events?: StrategyEventResponse[]
