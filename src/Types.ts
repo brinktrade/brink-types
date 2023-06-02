@@ -221,6 +221,10 @@ export type OracleJSON = {
   params: string
 }
 
+export interface ProcessError {
+  message: string;
+}
+
 export interface TransactionResponse extends TransactionData {
 	functionSignature: string
 	params: ContractCallParam[]
@@ -296,9 +300,9 @@ export type StrategyRequestInclude = 'required_transactions' | 'estimates' | 'ro
 export type SignedStrategyRequestsInclude = 'events' | StrategyRequestInclude
 
 interface SwapResponse {
-  requiredTransactions?: (ApprovalResponse | TransactionResponse)[]
-  routes?: RouteSegment[]
-  bytes?: string
+  requiredTransactions?: (ApprovalResponse | TransactionResponse)[] | ProcessError
+  routes?: RouteSegment[] | ProcessError
+  bytes?: string | ProcessError
 }
 
 export interface MarketSwapExactInputRequest {
@@ -312,7 +316,7 @@ export interface MarketSwapExactInputRequest {
 }
 
 export interface MarketSwapExactInputResponse extends SwapResponse {
-  estimates?: MarketSwapInputEstimate
+  estimates?: MarketSwapInputEstimate | ProcessError
 }
 
 export interface MarketSwapExactOutputRequest {
@@ -339,7 +343,7 @@ export interface LimitSwapExactInputRequest {
 }
 
 export interface LimitSwapExactInputResponse extends SwapResponse {
-  estimates?: LimitSwapInputEstimates
+  estimates?: LimitSwapInputEstimates | ProcessError
 }
 
 export interface LimitSwapExactOutputRequest {
@@ -352,7 +356,7 @@ export interface LimitSwapExactOutputRequest {
 }
 
 export interface LimitSwapExactOutputResponse extends SwapResponse {
-  estimates?: LimitSwapOutputEstimates
+  estimates?: LimitSwapOutputEstimates | ProcessError
 }
 
 export interface RequireCheckRequest {
@@ -423,11 +427,11 @@ export type StrategyOrderSwapResponse = (
 
 export interface StrategyMetadata {
   hash: string
-  swaps?: StrategyOrderSwapResponse[]
-  requiredTransactions?: (ApprovalResponse | TransactionResponse)[]
-  cancel?: TransactionResponse
-	eip712Data?: EIP712TypedData
-  eip1271Data?: {}
+  swaps?: StrategyOrderSwapResponse[] | ProcessError
+  requiredTransactions?: (ApprovalResponse | TransactionResponse)[] | ProcessError
+  cancel?: TransactionResponse | ProcessError
+	eip712Data?: EIP712TypedData | ProcessError
+  eip1271Data?: {} | ProcessError
 }
 
 export interface StrategyDataRequest extends StrategyRequestBase {
