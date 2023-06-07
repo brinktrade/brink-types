@@ -330,6 +330,7 @@ export interface MarketSwapExactInputRequest {
   feePercent: BigIntish
   feeMinTokenOut: BigIntish
   signer?: string
+  gasPrice?: BigIntish
   include?: SwapRequestInclude[]
 }
 
@@ -344,6 +345,7 @@ export interface MarketSwapExactOutputRequest {
   feePercent: BigIntish
   feeMinTokenOut: BigIntish
   signer?: string
+  gasPrice?: BigIntish
   include?: SwapRequestInclude[]
 }
 
@@ -357,6 +359,7 @@ export interface LimitSwapExactInputRequest {
   tokenInAmount: BigIntish
   priceCurve: OracleJSON
   signer: string
+  gasPrice?: BigIntish
   include?: SwapRequestInclude[]
 }
 
@@ -370,6 +373,7 @@ export interface LimitSwapExactOutputRequest {
   tokenOutAmount: BigIntish
   priceCurve: OracleJSON
   signer: string
+  gasPrice?: BigIntish
   include?: SwapRequestInclude[]
 }
 
@@ -433,6 +437,7 @@ interface StrategyRequestBase {
   signer?: string
   chainId?: BigIntish
   signatureType?: SignatureType
+  gasPrice?: BigIntish
   include?: StrategyRequestInclude[]
 }
 
@@ -506,6 +511,7 @@ export interface SignedStrategiesRequest {
   status?: StrategyStatus[]
   sort?: StrategySort
   sortBy?: StrategySortBy
+  gasPrice?: BigIntish
   include?: SignedStrategyRequestsInclude[]
 }
 
