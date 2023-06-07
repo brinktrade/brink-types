@@ -1,10 +1,10 @@
-export type ContractCallParam = bigint | boolean | string | SignatureTypeEnum | TokenStruct | IdsProofStruct | PrimitiveStruct | CallStruct | ContractCallParam[]
+export type ContractCallParam = bigint | boolean | string | SignatureTypeEnum | TokenStruct | IdsProofStruct | FillStateParamsStruct | PrimitiveStruct | CallStruct | ContractCallParam[]
 
 export type RpcMethodCallParam = number | boolean | string
 
-export type PrimitiveParamValue = ContractCallParam | OracleJSON | TokenJSON
+export type PrimitiveParamValue = ContractCallParam | OracleJSON | TokenJSON | IdsProofJSON | FillStateParamsJSON
 
-export type PrimitiveParamJSON = boolean | string | number | SignatureTypeEnum | IdsProofJSON | OracleJSON | TokenJSON
+export type PrimitiveParamJSON = boolean | string | number | SignatureTypeEnum | OracleJSON | TokenJSON | IdsProofJSON | FillStateParamsJSON
 
 export type BigIntish = bigint | string | number
 
@@ -71,6 +71,24 @@ export type IdsProofJSON = {
   statusProof_lastTransferTimes: string[]
   statusProof_timestamps: string[]
   statusProof_signatures: string[];
+}
+
+export type FillStateParamsArgs = {
+  id: BigIntish
+  startX96: BigIntish
+  sign: boolean
+}
+
+export type FillStateParamsStruct = {
+  id: bigint
+  startX96: bigint
+  sign: boolean
+}
+
+export type FillStateParamsJSON = {
+  id: string
+  startX96: string
+  sign: boolean
 }
 
 export type TokenAmount = {
