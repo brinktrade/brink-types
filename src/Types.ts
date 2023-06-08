@@ -536,7 +536,7 @@ export interface StrategyEventResponse {
 
 export interface SignedStrategyResponse extends StrategyMetadata {
   createdAt: string
-  expiryTime: string
+  expiryTime?: string | ProcessError
   strategy: StrategyResponse
   strategyType: StrategyType
   signer: string
