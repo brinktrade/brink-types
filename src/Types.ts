@@ -106,6 +106,11 @@ export type PrimitiveType =
   'swap' |
   'require'
 
+export type PriceCurveType =
+  'flat' |
+  'linear' |
+  'quadratic'
+
 export type PrimitiveArgs = {
   functionName: PrimitiveFunctionName
   params: Record<string, PrimitiveParamValue>
