@@ -549,7 +549,7 @@ export interface SignedStrategyResponse extends StrategyMetadata {
   signatureType: SignatureType
   chainId: string
   strategyContract: string
-  tokens: TokenJSON[]
+  tokens: Record<string, TokenJSON[]>
   events?: StrategyEventResponse[]
 }
 
