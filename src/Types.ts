@@ -334,7 +334,7 @@ export interface MarketSwapExactInputRequest {
   tokenInAmount: BigIntish
   feePercent: BigIntish
   feeMinTokenOut: BigIntish
-  signer?: string
+  buyer?: string
   gasPrice?: BigIntish
   include?: SwapRequestInclude[]
 }
@@ -349,7 +349,7 @@ export interface MarketSwapExactOutputRequest {
   tokenInAmount: BigIntish
   feePercent: BigIntish
   feeMinTokenOut: BigIntish
-  signer?: string
+  buyer?: string
   gasPrice?: BigIntish
   include?: SwapRequestInclude[]
 }
@@ -363,7 +363,7 @@ export interface LimitSwapExactInputRequest {
 	tokenOut: TokenArgs
   tokenInAmount: BigIntish
   priceCurve: OracleJSON
-  signer: string
+  buyer?: string
   gasPrice?: BigIntish
   include?: SwapRequestInclude[]
 }
@@ -377,7 +377,7 @@ export interface LimitSwapExactOutputRequest {
 	tokenOut: TokenArgs
   tokenOutAmount: BigIntish
   priceCurve: OracleJSON
-  signer: string
+  buyer?: string
   gasPrice?: BigIntish
   include?: SwapRequestInclude[]
 }
