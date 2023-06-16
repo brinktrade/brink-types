@@ -96,6 +96,11 @@ export type TokenAmount = {
   amount: string
 }
 
+export type Bit = {
+  bitmapIndex: bigint
+  bit: bigint
+}
+
 export type PrimitiveFunctionName = 
   'useBit' |
   'marketSwapExactInput' |
