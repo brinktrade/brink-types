@@ -97,8 +97,8 @@ export type TokenAmount = {
 }
 
 export type Bit = {
-  bitmapIndex: bigint
-  bit: bigint
+  index: bigint
+  value: bigint
 }
 
 export type PrimitiveFunctionName = 
