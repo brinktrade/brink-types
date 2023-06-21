@@ -2,9 +2,9 @@ export type ContractCallParam = bigint | boolean | string | SignatureTypeEnum | 
 
 export type RpcMethodCallParam = number | boolean | string
 
-export type PrimitiveParamValue = ContractCallParam | OracleJSON | TokenJSON | IdsProofJSON | FillStateParamsJSON
+export type PrimitiveParamValue = ContractCallParam | OracleJSON | TokenJSON | IdsProofJSON | FillStateParamsJSON | BitJSON
 
-export type PrimitiveParamJSON = boolean | string | number | SignatureTypeEnum | OracleJSON | TokenJSON | IdsProofJSON | FillStateParamsJSON
+export type PrimitiveParamJSON = boolean | string | number | SignatureTypeEnum | OracleJSON | TokenJSON | IdsProofJSON | FillStateParamsJSON | BitJSON
 
 export type BigIntish = bigint | string | number
 
@@ -71,6 +71,16 @@ export type IdsProofJSON = {
   statusProof_lastTransferTimes: string[]
   statusProof_timestamps: string[]
   statusProof_signatures: string[];
+}
+
+export type BitArgs = {
+  index: BigIntish
+  value: BigIntish
+}
+
+export type BitJSON = {
+  index: string
+  value: string
 }
 
 export type FillStateParamsArgs = {
