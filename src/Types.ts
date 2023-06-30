@@ -334,7 +334,7 @@ export type StrategyResponse = {
 }
 
 export type SwapRequestInclude = 'required_transactions' | 'estimates' | 'routes' | 'bytes'
-export type StrategyRequestInclude = 'required_transactions' | 'estimates' | 'routes' | 'cancel' | 'eip712_data' | 'eip1271_data'
+export type StrategyRequestInclude = 'required_transactions' | 'estimates' | 'routes' | 'cancel' 
 export type SignedStrategyRequestsInclude = 'events' | StrategyRequestInclude
 
 interface SwapResponse {
@@ -532,7 +532,6 @@ export interface SignedStrategiesRequest {
   sort?: StrategySort
   sortBy?: StrategySortBy
   gasPrice?: BigIntish
-  include?: SignedStrategyRequestsInclude[]
 }
 
 export type MinedTransaction = {
