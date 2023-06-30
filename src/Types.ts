@@ -532,7 +532,6 @@ export interface SignedStrategiesRequest {
   sort?: StrategySort
   sortBy?: StrategySortBy
   gasPrice?: BigIntish
-  include?: SignedStrategyRequestsInclude[]
 }
 
 export type MinedTransaction = {
