@@ -259,6 +259,11 @@ export type OracleJSON = {
   params: string
 }
 
+export type PriceCurveJSON = {
+  address: string
+  params: string
+}
+
 export interface ProcessError {
   message: string;
 }
