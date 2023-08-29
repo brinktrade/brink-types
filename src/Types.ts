@@ -115,7 +115,8 @@ export type PrimitiveFunctionName =
   'useBit' |
   'marketSwapExactInput' |
   'requireBlockNotMined' |
-  'requireUint256LowerBound'
+  'requireUint256LowerBound' |
+  'limitSwapExactInput'
 
 export type PrimitiveType =
   'swap' |
