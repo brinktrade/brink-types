@@ -116,7 +116,8 @@ export type PrimitiveFunctionName =
   'marketSwapExactInput' |
   'requireBlockNotMined' |
   'requireUint256LowerBound' |
-  'limitSwapExactInput'
+  'limitSwapExactInput' |
+  'blockInterval'
 
 export type PrimitiveType =
   'swap' |
@@ -457,6 +458,21 @@ export interface LimitSwapExactInputOrderResponse extends LimitSwapExactInputRes
 
 export interface LimitSwapExactOutputOrderResponse extends LimitSwapExactOutputResponse {
   orderIndex: number
+}
+
+export interface BlockIntervalRequest extends RequireCheckRequest {
+  signer: string
+  id: BigIntish
+  initialStart: BigIntish
+  intervalMinSize: BigIntish
+  maxIntervals: BigIntish
+}
+
+export interface BlockIntervalResponse extends RequireCheckResponse {
+  intervalReady: boolean
+  maxIntervalsExceeded: boolean
+  start: number
+  counter: number
 }
 
 interface StrategyRequestBase {
