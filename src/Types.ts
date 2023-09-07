@@ -533,14 +533,8 @@ export interface StopMarketExactOutputStrategyRequest extends StrategyRequestBas
 
 export type StrategyType = 'stop_market' | 'stop_limit' | 'limit' | 'market' | 'custom'
 export type StrategyStatus = 'open' | 'filled' | 'cancelled' | 'expired'
-export type StrategySort =
-  'created_time' |
-  'last_transaction_block' |
-  'first_transaction_block' |
-  'expiry_block' |
-  'cancelled_block' |
-  'filled_block'
-export type StrategySortBy = 'asc' | 'desc'
+export type StrategySortBy = 'created_time'
+export type StrategySortDirection = 'asc' | 'desc'
 
 export interface SignedStrategiesRequest {
   limit?: number
@@ -551,8 +545,8 @@ export interface SignedStrategiesRequest {
   tokens?: TokenArgs[]
   signatureType?: SignatureType[]
   status?: StrategyStatus[]
-  sort?: StrategySort
   sortBy?: StrategySortBy
+  sortDirection?: StrategySortDirection
   gasPrice?: BigIntish
 }
 
