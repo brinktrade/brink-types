@@ -22,6 +22,14 @@ export enum TokenStandard {
   ETH = 3
 }
 
+export type BlockState = 'MINED' | 'NOT_MINED'
+
+export type NonceState = 'USED' | 'NOT_USED'
+
+export type RunsType = 'ONCE' | 'UNTIL_CANCELLED'
+
+export type PriceOperator = '<' | '>' | 'GREATER_THAN' | 'LESS_THAN'
+
 export type TokenArgs = {
   address: string
   standard?: TokenStandard
@@ -115,6 +123,7 @@ export type PrimitiveFunctionName =
   'useBit' |
   'marketSwapExactInput' |
   'requireBlockNotMined' |
+  'requireBlockMined' |
   'requireUint256LowerBound' |
   'limitSwapExactInput' |
   'blockInterval'
@@ -127,6 +136,95 @@ export type PriceCurveType =
   'flat' |
   'linear' |
   'quadratic'
+
+export type ConditionType =
+  'price' |
+  'interval' |
+  'block' |
+  'nonce'
+
+export type ActionType =
+  'limitSwap' |
+  'marketSwap'
+
+
+export type ConditionArgs =
+  PriceConditionArgs |
+  IntervalConditionArgs |
+  BlockConditionArgs |
+  NonceConditionArgs
+
+export type ActionArgs =
+  LimitSwapActionArgs |
+  MarketSwapActionArgs
+
+export interface ConditionArgsBase {
+  type: ConditionType
+}
+
+export interface PriceConditionArgs extends ConditionArgsBase {
+  operator: PriceOperator
+  tokenA: string
+  tokenB: string
+  price: number
+}
+
+export interface IntervalConditionArgs extends ConditionArgsBase {
+  id: BigIntish
+	intervalMinBlocks: BigIntish
+	initialStartBlock?: BigIntish
+	maxIntervals?: BigIntish
+}
+
+export interface BlockConditionArgs extends ConditionArgsBase {
+  state: BlockState
+  blockNumber: BigIntish
+}
+
+export interface NonceConditionArgs extends ConditionArgsBase {
+  state: NonceState
+  nonce: BigIntish
+}
+
+export interface ActionArgsBase {
+  type: ActionType
+}
+
+export interface MarketSwapActionArgs extends ActionArgsBase {
+  owner: string
+  tokenIn: string | TokenArgs
+  tokenOut: string | TokenArgs
+  tokenInAmount: BigIntish
+  feePercent: number
+  feeMinTokenOut?: BigIntish
+}
+
+export interface LimitSwapActionArgs extends ActionArgsBase {
+  owner: string
+  tokenIn: string | TokenArgs
+  tokenOut: string | TokenArgs
+  tokenInAmount: BigIntish
+  tokenOutAmount?: BigIntish
+  price?: number
+}
+
+export type IntentReplay = {
+  nonce: BigIntish
+  runs: RunsType
+}
+
+export type IntentSegmentArgs = {
+  replay?: IntentReplay
+  expiryBlock?: BigIntish
+  conditions?: ConditionArgs[]
+  actions: ActionArgs[]
+}
+
+export type IntentArgs = {
+  segments: IntentSegmentArgs[]
+  replay?: IntentReplay
+  expiryBlock?: BigIntish
+}
 
 export type PrimitiveArgs = {
   functionName: PrimitiveFunctionName
@@ -422,6 +520,14 @@ export interface RequireBlockNotMinedRequest extends RequireCheckRequest {
 }
 
 export interface RequireBlockNotMinedResponse extends RequireCheckResponse {
+  currentBlock: string
+}
+
+export interface RequireBlockMinedRequest extends RequireCheckRequest {
+  blockNumber: BigIntish
+}
+
+export interface RequireBlockMinedResponse extends RequireCheckResponse {
   currentBlock: string
 }
 
