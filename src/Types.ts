@@ -167,8 +167,8 @@ export interface ConditionArgsBase {
 
 export interface PriceConditionArgs extends ConditionArgsBase {
   operator: PriceOperator
-  tokenAddressA: string
-  tokenAddressB: string
+  tokenA: string | TokenArgs
+  tokenB: string | TokenArgs
   price: number
 }
 
