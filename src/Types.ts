@@ -127,6 +127,7 @@ export type PrimitiveFunctionName =
   'requireBlockNotMined' |
   'requireBlockMined' |
   'requireUint256LowerBound' |
+  'requireUint256UpperBound' |
   'limitSwapExactInput' |
   'blockInterval'
 
@@ -166,8 +167,8 @@ export interface ConditionArgsBase {
 
 export interface PriceConditionArgs extends ConditionArgsBase {
   operator: PriceOperator
-  tokenA: string
-  tokenB: string
+  tokenAddressA: string
+  tokenAddressB: string
   price: number
 }
 
