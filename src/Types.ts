@@ -28,7 +28,7 @@ export type NonceState = 'USED' | 'NOT_USED'
 
 export type RunsType = 'ONCE' | 'UNTIL_CANCELLED'
 
-export type PriceOperator = '<' | '>' | 'GREATER_THAN' | 'LESS_THAN'
+export type PriceOperator = 'gt' | 'lt'
 
 export type TokenArgs = {
   address: string
