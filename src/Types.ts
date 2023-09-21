@@ -544,6 +544,14 @@ export interface RequireUint256LowerBoundRequest extends RequireCheckRequest {
 export interface RequireUint256LowerBoundResponse extends RequireCheckResponse {
   oracleValue: string
 }
+export interface RequireUint256UpperBoundRequest extends RequireCheckRequest {
+  oracle: OracleJSON
+  upperBound: BigIntish
+}
+
+export interface RequireUint256UpperBoundResponse extends RequireCheckResponse {
+  oracleValue: string
+}
 
 export interface UseBitRequest extends RequireCheckRequest {
   signer: string
