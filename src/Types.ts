@@ -129,7 +129,9 @@ export type PrimitiveFunctionName =
   'requireUint256LowerBound' |
   'requireUint256UpperBound' |
   'limitSwapExactInput' |
-  'blockInterval'
+  'blockInterval' | 
+  'requireBitNotUsed' |
+  'requireBitUsed'
 
 export type PrimitiveType =
   'swap' |
@@ -709,3 +711,15 @@ export interface SubmitStrategyRequest {
 export interface SubmitStrategyResponse {
   hash: string
 }
+
+export interface requireBitUsedRequest {
+  bit: BitJSON;
+}
+
+export interface RequireBitUsedResponse extends RequireCheckResponse {}
+
+export interface requireBitNotUsedRequest {
+  bit: BitJSON; 
+}
+
+export interface RequireBitNotUsedResponse extends RequireCheckResponse {}
