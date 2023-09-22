@@ -129,9 +129,7 @@ export type PrimitiveFunctionName =
   'requireUint256LowerBound' |
   'requireUint256UpperBound' |
   'limitSwapExactInput' |
-  'blockInterval' | 
-  'requireBitNotUsed' |
-  'requireBitUsed'
+  'blockInterval'
 
 export type PrimitiveType =
   'swap' |
