@@ -28,7 +28,7 @@ export type NonceState = 'USED' | 'NOT_USED'
 
 export type RunsType = 'ONCE' | 'UNTIL_CANCELLED'
 
-export type PriceOperator = '<' | '>' | 'GREATER_THAN' | 'LESS_THAN'
+export type PriceOperator = 'gt' | 'lt'
 
 export type TokenArgs = {
   address: string
@@ -127,6 +127,7 @@ export type PrimitiveFunctionName =
   'requireBlockNotMined' |
   'requireBlockMined' |
   'requireUint256LowerBound' |
+  'requireUint256UpperBound' |
   'limitSwapExactInput' |
   'blockInterval'
 
@@ -166,8 +167,8 @@ export interface ConditionArgsBase {
 
 export interface PriceConditionArgs extends ConditionArgsBase {
   operator: PriceOperator
-  tokenA: string
-  tokenB: string
+  tokenA: string | TokenArgs
+  tokenB: string | TokenArgs
   price: number
 }
 
@@ -531,15 +532,6 @@ export interface RequireBlockMinedRequest extends RequireCheckRequest {
 
 export interface RequireBlockMinedResponse extends RequireCheckResponse {
   currentBlock: string
-}
-
-export interface RequireUint256LowerBoundRequest extends RequireCheckRequest {
-  oracle: OracleJSON
-  lowerBound: BigIntish
-}
-
-export interface RequireUint256LowerBoundResponse extends RequireCheckResponse {
-  oracleValue: string
 }
 
 export interface UseBitRequest extends RequireCheckRequest {
