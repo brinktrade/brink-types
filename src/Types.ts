@@ -172,6 +172,8 @@ export interface PriceConditionArgs extends ConditionArgsBase {
   tokenA: string | TokenArgs
   tokenB: string | TokenArgs
   price: number
+  twapInterval?: BigIntish
+  twapFeePool?: BigIntish
 }
 
 export interface IntervalConditionArgs extends ConditionArgsBase {
