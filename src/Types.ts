@@ -24,15 +24,15 @@ export enum TokenStandard {
 
 export type BlockState = 'MINED' | 'NOT_MINED'
 
-export const USED_NONCE_STATE = 'USED';
-export const NOT_USED_NONCE_STATE = 'NOT_USED';
-export type NonceState = typeof USED_NONCE_STATE | typeof NOT_USED_NONCE_STATE;
+export type NonceState = 'USED' | 'NOT_USED';
+export const USED_NONCE_STATE: NonceState = 'USED';
+export const NOT_USED_NONCE_STATE: NonceState = 'NOT_USED';
 
 export type RunsType = 'ONCE' | 'UNTIL_CANCELLED'
 
-export const GREATER_THAN_OPERATOR = 'gt'
-export const LESS_THAN_OPERATOR = 'lt'
-export type PriceOperator = typeof GREATER_THAN_OPERATOR | typeof LESS_THAN_OPERATOR
+export type PriceOperator = 'gt' | 'lt'
+export const GREATER_THAN_OPERATOR: PriceOperator = 'gt'
+export const LESS_THAN_OPERATOR: PriceOperator = 'lt'
 
 export type TokenArgs = {
   address: string
