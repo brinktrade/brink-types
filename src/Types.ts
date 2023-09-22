@@ -24,7 +24,9 @@ export enum TokenStandard {
 
 export type BlockState = 'MINED' | 'NOT_MINED'
 
-export type NonceState = 'USED' | 'NOT_USED'
+export const USED_NONCE_STATE = 'USED';
+export const NOT_USED_NONCE_STATE = 'NOT_USED';
+export type NonceState = typeof USED_NONCE_STATE | typeof NOT_USED_NONCE_STATE;
 
 export type RunsType = 'ONCE' | 'UNTIL_CANCELLED'
 
