@@ -536,23 +536,6 @@ export interface RequireBlockMinedResponse extends RequireCheckResponse {
   currentBlock: string
 }
 
-export interface RequireUint256LowerBoundRequest extends RequireCheckRequest {
-  oracle: OracleJSON
-  lowerBound: BigIntish
-}
-
-export interface RequireUint256LowerBoundResponse extends RequireCheckResponse {
-  oracleValue: string
-}
-export interface RequireUint256UpperBoundRequest extends RequireCheckRequest {
-  oracle: OracleJSON
-  upperBound: BigIntish
-}
-
-export interface RequireUint256UpperBoundResponse extends RequireCheckResponse {
-  oracleValue: string
-}
-
 export interface UseBitRequest extends RequireCheckRequest {
   signer: string
   bitmapIndex: BigIntish
@@ -719,15 +702,3 @@ export interface SubmitStrategyRequest {
 export interface SubmitStrategyResponse {
   hash: string
 }
-
-export interface requireBitUsedRequest {
-  bit: BitJSON;
-}
-
-export interface RequireBitUsedResponse extends RequireCheckResponse {}
-
-export interface requireBitNotUsedRequest {
-  bit: BitJSON; 
-}
-
-export interface RequireBitNotUsedResponse extends RequireCheckResponse {}
