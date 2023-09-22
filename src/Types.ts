@@ -122,6 +122,8 @@ export type Bit = {
 export type PrimitiveFunctionName = 
   'useBit' |
   'marketSwapExactInput' |
+  'requireBitUsed' |
+  'requireBitNotUsed' |
   'requireBlockNotMined' |
   'requireBlockMined' |
   'requireUint256LowerBound' |
