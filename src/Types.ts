@@ -172,7 +172,7 @@ export interface ConditionArgsBase {
 }
 
 export interface TokenWithDecimalsArgs extends TokenArgs {
-  decimals: number;
+  decimals: BigIntish;
 }
 
 export interface PriceConditionArgs extends ConditionArgsBase {
