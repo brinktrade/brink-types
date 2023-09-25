@@ -172,7 +172,9 @@ export interface ConditionArgsBase {
 export interface PriceConditionArgs extends ConditionArgsBase {
   operator: PriceOperator
   tokenA: string | TokenArgs
+  tokenA_decimals: number;
   tokenB: string | TokenArgs
+  tokenB_decimals: number;
   price: number
   twapInterval?: BigIntish
   twapFeePool?: BigIntish
