@@ -171,12 +171,14 @@ export interface ConditionArgsBase {
   type: ConditionType
 }
 
+export interface TokenWithDecimalsArgs extends TokenArgs {
+  decimals: number;
+}
+
 export interface PriceConditionArgs extends ConditionArgsBase {
   operator: `${PriceOperator}`
-  tokenA: string | TokenArgs
-  tokenA_decimals: number;
-  tokenB: string | TokenArgs
-  tokenB_decimals: number;
+  tokenA: TokenWithDecimalsArgs
+  tokenB: TokenWithDecimalsArgs
   price: number
   twapInterval?: BigIntish
   twapFeePool?: BigIntish
