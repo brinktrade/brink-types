@@ -24,15 +24,17 @@ export enum TokenStandard {
 
 export type BlockState = 'MINED' | 'NOT_MINED'
 
-export type NonceState = 'USED' | 'NOT_USED';
-export const USED_NONCE_STATE: NonceState = 'USED';
-export const NOT_USED_NONCE_STATE: NonceState = 'NOT_USED';
+export enum NonceState {
+    USED = 'USED',
+    NOT_USED = 'NOT_USED'
+}
 
 export type RunsType = 'ONCE' | 'UNTIL_CANCELLED'
 
-export type PriceOperator = 'gt' | 'lt'
-export const GREATER_THAN_OPERATOR: PriceOperator = 'gt'
-export const LESS_THAN_OPERATOR: PriceOperator = 'lt'
+export enum PriceOperator {
+    GREATER_THAN = 'gt',
+    LESS_THAN = 'lt'
+}
 
 export type TokenArgs = {
   address: string
@@ -170,7 +172,7 @@ export interface ConditionArgsBase {
 }
 
 export interface PriceConditionArgs extends ConditionArgsBase {
-  operator: PriceOperator
+  operator: `${PriceOperator}`
   tokenA: string | TokenArgs
   tokenA_decimals: number;
   tokenB: string | TokenArgs
@@ -193,7 +195,7 @@ export interface BlockConditionArgs extends ConditionArgsBase {
 }
 
 export interface NonceConditionArgs extends ConditionArgsBase {
-  state: NonceState
+  state: `${NonceState}`
   nonce: BigIntish
 }
 
