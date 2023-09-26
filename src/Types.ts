@@ -186,8 +186,8 @@ export interface PriceConditionArgs extends ConditionArgsBase {
 
 export interface IntervalConditionArgs extends ConditionArgsBase {
   id: BigIntish
-	intervalMinBlocks: BigIntish
-	initialStartBlock?: BigIntish
+	interval: BigIntish
+	startBlock?: BigIntish
 	maxIntervals?: BigIntish
 }
 
