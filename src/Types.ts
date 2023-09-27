@@ -215,6 +215,7 @@ export interface MarketSwapActionArgs extends ActionArgsBase {
 }
 
 export interface LimitSwapActionArgs extends ActionArgsBase {
+  id: BigIntish
   owner: string
   tokenIn: string | TokenArgs
   tokenOut: string | TokenArgs
