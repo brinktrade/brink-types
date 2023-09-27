@@ -1,10 +1,10 @@
-export type ContractCallParam = bigint | boolean | string | SignatureTypeEnum | TokenStruct | IdsProofStruct | FillStateParamsStruct | PrimitiveStruct | CallStruct | ContractCallParam[]
+export type ContractCallParam = bigint | boolean | string | SignatureTypeEnum | TokenStruct | IdsProofStruct | FillStateParamsStruct | SegmentStruct | CallStruct | ContractCallParam[]
 
 export type RpcMethodCallParam = number | boolean | string
 
-export type PrimitiveParamValue = ContractCallParam | OracleJSON | TokenJSON | IdsProofJSON | FillStateParamsJSON | BitJSON
+export type SegmentParamValue = ContractCallParam | OracleJSON | TokenJSON | IdsProofJSON | FillStateParamsJSON | BitJSON
 
-export type PrimitiveParamJSON = boolean | string | number | SignatureTypeEnum | OracleJSON | TokenJSON | IdsProofJSON | FillStateParamsJSON | BitJSON
+export type SegmentParamJSON = boolean | string | number | SignatureTypeEnum | OracleJSON | TokenJSON | IdsProofJSON | FillStateParamsJSON | BitJSON
 
 export type BigIntish = bigint | string | number
 
@@ -125,7 +125,7 @@ export type Bit = {
   value: bigint
 }
 
-export type PrimitiveFunctionName = 
+export type SegmentFunctionName = 
   'useBit' |
   'marketSwapExactInput' |
   'requireBitUsed' |
@@ -137,7 +137,7 @@ export type PrimitiveFunctionName =
   'limitSwapExactInput' |
   'blockInterval'
 
-export type PrimitiveType =
+export type SegmentType =
   'swap' |
   'require'
 
@@ -241,64 +241,64 @@ export type IntentArgs = {
   expiryBlock?: BigIntish
 }
 
-export type PrimitiveArgs = {
-  functionName: PrimitiveFunctionName
-  params: Record<string, PrimitiveParamValue>
+export type SegmentArgs = {
+  functionName: SegmentFunctionName
+  params: Record<string, SegmentParamValue>
   data?: string
   requiresUnsignedCall?: boolean
 }
 
-export type OrderArgs = {
-  primitives: PrimitiveArgs[]
+export type IntentGroupIntentArgs = {
+  segments: SegmentArgs[]
 }
 
-export type StrategyArgs = {
-  orders: OrderArgs[]
+export type IntentGroupArgs = {
+  intents: IntentGroupIntentArgs[]
   beforeCalls?: any[]
   afterCalls?: any[]
-  primitivesContract?: string,
+  segmentsContract?: string,
   data?: string
 }
 
-export type SignedStrategyArgs = {
+export type SignedIntentGroupArgs = {
   signer: string
   chainId: number
   signature: string
-  strategy: StrategyArgs
-  strategyContract?: string
+  intentGroup: IntentGroupArgs
+  intentGroupContract?: string
   signatureType?: SignatureType
   eip712Data?: EIP712TypedData
   account?: string
 }
 
-export type PrimitiveJSON = {
-  functionName: PrimitiveFunctionName
-  params: Record<string, PrimitiveParamJSON>
+export type SegmentJSON = {
+  functionName: SegmentFunctionName
+  params: Record<string, SegmentParamJSON>
   data: string
   requiresUnsignedCall: boolean
 }
 
-export type OrderJSON = {
-  primitives: PrimitiveJSON[]
+export type IntentGroupIntentJSON = {
+  segments: SegmentJSON[]
 }
 
-export type StrategyJSON = {
-  orders: OrderJSON[]
+export type IntentGroupJSON = {
+  intents: IntentGroupIntentJSON[]
   beforeCalls: any[]
   afterCalls: any[]
-  primitivesContract: string,
+  segmentsContract: string,
   data: string
 }
 
-export type SignedStrategyJSON = {
+export type SignedIntentGroupJSON = {
   eip712Data: EIP712TypedData
   account: string
   chainId: number
   signer: string
   signatureType: SignatureType
   signature: string
-  strategy: StrategyJSON
-  strategyContract: string
+  intentGroup: IntentGroupJSON
+  intentGroupContract: string
 }
 
 export type EIP712Domain = {
@@ -315,7 +315,7 @@ export type EIP712TypedData = {
   hash: string
 }
 
-export type PrimitiveStruct = {
+export type SegmentStruct = {
   data: string
   requiresUnsignedCall: boolean
 }
@@ -334,11 +334,11 @@ export type ValidationResult = {
 export type InvalidReason = keyof typeof invalidReasonMessages
 
 export const invalidReasonMessages = {
-  ZERO_ORDERS: 'Strategy must have at least 1 order',
-  WRONG_NUMBER_OF_SWAPS: 'All orders must have exactly 1 swap',
+  ZERO_INTENTS: 'IntentGroup must have at least 1 intent',
+  WRONG_NUMBER_OF_SWAPS: 'All intents must have exactly 1 swap',
   SIGNATURE_MISMATCH: 'Signer address does not match recovered address from signature',
   ACCOUNT_MISMATCH: 'Account address is not owned by signer',
-  HASH_MISMATCH: 'Hash does not match strategy data'
+  HASH_MISMATCH: 'Hash does not match intentGroup data'
 }
 
 export type TransactionData = {
@@ -358,7 +358,7 @@ export type ParamType = {
   calldata?: boolean
 }
 
-export type PrimitiveParamType = {
+export type SegmentParamType = {
   name: string
   type: string
   signed: boolean
@@ -436,26 +436,26 @@ export interface LimitSwapInputEstimates {
   price: number
 }
 
-export type PrimitiveResponse = {
-  functionName: PrimitiveFunctionName
-  params: Record<string, PrimitiveParamValue>
+export type SegmentResponse = {
+  functionName: SegmentFunctionName
+  params: Record<string, SegmentParamValue>
   requiresUnsignedCall: boolean
 }
 
-export type OrderResponse = {
-  primitives: PrimitiveResponse[]
+export type IntentResponse = {
+  segments: SegmentResponse[]
 }
 
-export type StrategyResponse = {
-  orders: OrderResponse[]
+export type IntentGroupResponse = {
+  intents: IntentResponse[]
   beforeCalls: any[]
   afterCalls: any[]
-  primitivesContract: string
+  segmentsContract: string
 }
 
 export type SwapRequestInclude = 'required_transactions' | 'estimates' | 'routes' | 'bytes'
-export type StrategyRequestInclude = 'required_transactions' | 'estimates' | 'routes' | 'cancel' 
-export type SignedStrategyRequestsInclude = 'events' | StrategyRequestInclude
+export type IntentGroupRequestInclude = 'required_transactions' | 'estimates' | 'routes' | 'cancel' 
+export type SignedIntentGroupRequestsInclude = 'events' | IntentGroupRequestInclude
 
 interface SwapResponse {
   requiredTransactions?: (ApprovalResponse | TransactionResponse)[] | ProcessError
@@ -556,20 +556,20 @@ export interface UseBitResponse extends RequireCheckResponse {
   bitUsed: boolean
 }
 
-export interface MarketSwapExactInputOrderResponse extends MarketSwapExactInputResponse {
-  orderIndex: number
+export interface MarketSwapExactInputIntentResponse extends MarketSwapExactInputResponse {
+  intentIndex: number
 }
 
-export interface MarketSwapExactOutputOrderResponse extends MarketSwapExactOutputResponse {
-  orderIndex: number
+export interface MarketSwapExactOutputIntentResponse extends MarketSwapExactOutputResponse {
+  intentIndex: number
 }
 
-export interface LimitSwapExactInputOrderResponse extends LimitSwapExactInputResponse {
-  orderIndex: number
+export interface LimitSwapExactInputIntentResponse extends LimitSwapExactInputResponse {
+  intentIndex: number
 }
 
-export interface LimitSwapExactOutputOrderResponse extends LimitSwapExactOutputResponse {
-  orderIndex: number
+export interface LimitSwapExactOutputIntentResponse extends LimitSwapExactOutputResponse {
+  intentIndex: number
 }
 
 export interface BlockIntervalRequest extends RequireCheckRequest {
@@ -587,39 +587,39 @@ export interface BlockIntervalResponse extends RequireCheckResponse {
   counter: number
 }
 
-interface StrategyRequestBase {
+interface IntentGroupRequestBase {
   signer?: string
   chainId?: BigIntish
   signatureType?: SignatureType
   gasPrice?: BigIntish
-  include?: StrategyRequestInclude[]
+  include?: IntentGroupRequestInclude[]
 }
 
-export type StrategyOrderSwapResponse = (
-  MarketSwapExactInputOrderResponse |
-  MarketSwapExactOutputOrderResponse |
-  LimitSwapExactInputOrderResponse |
-  LimitSwapExactOutputOrderResponse
+export type IntentGroupIntentSwapResponse = (
+  MarketSwapExactInputIntentResponse |
+  MarketSwapExactOutputIntentResponse |
+  LimitSwapExactInputIntentResponse |
+  LimitSwapExactOutputIntentResponse
 )
 
-export interface StrategyMetadata {
+export interface IntentGroupMetadata {
   hash: string
-  swaps?: StrategyOrderSwapResponse[] | ProcessError
+  swaps?: IntentGroupIntentSwapResponse[] | ProcessError
   requiredTransactions?: (ApprovalResponse | TransactionResponse)[] | ProcessError
   cancel?: TransactionResponse | ProcessError
 	eip712Data?: EIP712TypedData | ProcessError
   eip1271Data?: {} | ProcessError
 }
 
-export interface StrategyDataRequest extends StrategyRequestBase {
-  strategy: StrategyArgs
+export interface IntentGroupDataRequest extends IntentGroupRequestBase {
+  intentGroup: IntentGroupArgs
 }
 
-export interface StrategyDataResponse extends StrategyMetadata {
-  strategy: StrategyResponse
+export interface IntentGroupDataResponse extends IntentGroupMetadata {
+  intentGroup: IntentGroupResponse
 }
 
-export interface StopMarketExactInputStrategyRequest extends StrategyRequestBase {
+export interface StopMarketExactInputIntentGroupRequest extends IntentGroupRequestBase {
 	tokenIn: TokenArgs
   tokenOut: TokenArgs
   tokenInAmount: BigIntish
@@ -631,7 +631,7 @@ export interface StopMarketExactInputStrategyRequest extends StrategyRequestBase
   expiry: BigIntish
 }
 
-export interface StopMarketExactOutputStrategyRequest extends StrategyRequestBase {
+export interface StopMarketExactOutputIntentGroupRequest extends IntentGroupRequestBase {
 	tokenIn: TokenArgs
   tokenOut: TokenArgs
   tokenOutAmount: BigIntish
@@ -643,22 +643,22 @@ export interface StopMarketExactOutputStrategyRequest extends StrategyRequestBas
   expiry: BigIntish
 }
 
-export type StrategyType = 'stop_market' | 'stop_limit' | 'limit' | 'market' | 'custom'
-export type StrategyStatus = 'open' | 'filled' | 'cancelled' | 'expired'
-export type StrategySortBy = 'created_time'
-export type StrategySortDirection = 'asc' | 'desc'
+export type IntentGroupType = 'stop_market' | 'stop_limit' | 'limit' | 'market' | 'custom'
+export type IntentGroupStatus = 'open' | 'filled' | 'cancelled' | 'expired'
+export type IntentGroupSortBy = 'created_time'
+export type IntentGroupSortDirection = 'asc' | 'desc'
 
-export interface SignedStrategiesRequest {
+export interface SignedIntentGroupsRequest {
   limit?: number
   offset?: number
   signer?: string
   hash?: string
-  primitives?: PrimitiveFunctionName[]
+  segments?: SegmentFunctionName[]
   tokens?: TokenArgs[]
   signatureType?: SignatureType[]
-  status?: StrategyStatus[]
-  sortBy?: StrategySortBy
-  sortDirection?: StrategySortDirection
+  status?: IntentGroupStatus[]
+  sortBy?: IntentGroupSortBy
+  sortDirection?: IntentGroupSortDirection
   gasPrice?: BigIntish
 }
 
@@ -672,43 +672,43 @@ export type MinedTransaction = {
 	params?: ContractCallParam[]
 }
 
-export type StrategyEventType = 'create' | 'swap' | 'expire' | 'cancel' | 'unknown'
+export type IntentGroupEventType = 'create' | 'swap' | 'expire' | 'cancel' | 'unknown'
 
-export interface StrategyEventResponse {
-  eventType: StrategyEventType
+export interface IntentGroupEventResponse {
+  eventType: IntentGroupEventType
   success: boolean
-  orderIndex?: number
+  intentIndex?: number
   transaction?: MinedTransaction
 }
 
-export interface SignedStrategyResponse extends StrategyMetadata {
+export interface SignedIntentGroupResponse extends IntentGroupMetadata {
   createdAt: string
   expiryTime?: string | ProcessError
-  strategy: StrategyResponse
-  strategyType: StrategyType
+  intentGroup: IntentGroupResponse
+  intentGroupType: IntentGroupType
   signer: string
   signature: string
   signatureType: SignatureType
   chainId: string
-  strategyContract: string
+  intentGroupContract: string
   tokens: Record<string, TokenJSON[]>
-  events?: StrategyEventResponse[]
+  events?: IntentGroupEventResponse[]
 }
 
-export interface SignedStrategiesResponse {
+export interface SignedIntentGroupsResponse {
   count: number
-  strategies: SignedStrategyResponse[]
+  intentGroups: SignedIntentGroupResponse[]
 }
 
-export interface SubmitStrategyRequest {
-  strategy: StrategyArgs
+export interface SubmitIntentGroupRequest {
+  intentGroup: IntentGroupArgs
   signer: string
   signature: string
   signatureType?: SignatureType
-  strategyContract?: string
+  intentGroupContract?: string
   chainId?: BigIntish
 }
 
-export interface SubmitStrategyResponse {
+export interface SubmitIntentGroupResponse {
   hash: string
 }
