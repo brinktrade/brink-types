@@ -248,24 +248,24 @@ export type SegmentArgs = {
   requiresUnsignedCall?: boolean
 }
 
-export type IntentGroupIntentArgs = {
+export type DeclarationIntentArgs = {
   segments: SegmentArgs[]
 }
 
-export type IntentGroupArgs = {
-  intents: IntentGroupIntentArgs[]
+export type DeclarationArgs = {
+  intents: DeclarationIntentArgs[]
   beforeCalls?: any[]
   afterCalls?: any[]
   segmentsContract?: string,
   data?: string
 }
 
-export type SignedIntentGroupArgs = {
+export type SignedDeclarationArgs = {
   signer: string
   chainId: number
   signature: string
-  intentGroup: IntentGroupArgs
-  intentGroupContract?: string
+  declaration: DeclarationArgs
+  declarationContract?: string
   signatureType?: SignatureType
   eip712Data?: EIP712TypedData
   account?: string
@@ -278,27 +278,27 @@ export type SegmentJSON = {
   requiresUnsignedCall: boolean
 }
 
-export type IntentGroupIntentJSON = {
+export type DeclarationIntentJSON = {
   segments: SegmentJSON[]
 }
 
-export type IntentGroupJSON = {
-  intents: IntentGroupIntentJSON[]
+export type DeclarationJSON = {
+  intents: DeclarationIntentJSON[]
   beforeCalls: any[]
   afterCalls: any[]
   segmentsContract: string,
   data: string
 }
 
-export type SignedIntentGroupJSON = {
+export type SignedDeclarationJSON = {
   eip712Data: EIP712TypedData
   account: string
   chainId: number
   signer: string
   signatureType: SignatureType
   signature: string
-  intentGroup: IntentGroupJSON
-  intentGroupContract: string
+  declaration: DeclarationJSON
+  declarationContract: string
 }
 
 export type EIP712Domain = {
@@ -334,11 +334,11 @@ export type ValidationResult = {
 export type InvalidReason = keyof typeof invalidReasonMessages
 
 export const invalidReasonMessages = {
-  ZERO_INTENTS: 'IntentGroup must have at least 1 intent',
+  ZERO_INTENTS: 'Declaration must have at least 1 intent',
   WRONG_NUMBER_OF_SWAPS: 'All intents must have exactly 1 swap',
   SIGNATURE_MISMATCH: 'Signer address does not match recovered address from signature',
   ACCOUNT_MISMATCH: 'Account address is not owned by signer',
-  HASH_MISMATCH: 'Hash does not match intentGroup data'
+  HASH_MISMATCH: 'Hash does not match declaration data'
 }
 
 export type TransactionData = {
@@ -446,7 +446,7 @@ export type IntentResponse = {
   segments: SegmentResponse[]
 }
 
-export type IntentGroupResponse = {
+export type DeclarationResponse = {
   intents: IntentResponse[]
   beforeCalls: any[]
   afterCalls: any[]
@@ -454,8 +454,8 @@ export type IntentGroupResponse = {
 }
 
 export type SwapRequestInclude = 'required_transactions' | 'estimates' | 'routes' | 'bytes'
-export type IntentGroupRequestInclude = 'required_transactions' | 'estimates' | 'routes' | 'cancel' 
-export type SignedIntentGroupRequestsInclude = 'events' | IntentGroupRequestInclude
+export type DeclarationRequestInclude = 'required_transactions' | 'estimates' | 'routes' | 'cancel' 
+export type SignedDeclarationRequestsInclude = 'events' | DeclarationRequestInclude
 
 interface SwapResponse {
   requiredTransactions?: (ApprovalResponse | TransactionResponse)[] | ProcessError
@@ -587,39 +587,39 @@ export interface BlockIntervalResponse extends RequireCheckResponse {
   counter: number
 }
 
-interface IntentGroupRequestBase {
+interface DeclarationRequestBase {
   signer?: string
   chainId?: BigIntish
   signatureType?: SignatureType
   gasPrice?: BigIntish
-  include?: IntentGroupRequestInclude[]
+  include?: DeclarationRequestInclude[]
 }
 
-export type IntentGroupIntentSwapResponse = (
+export type DeclarationIntentSwapResponse = (
   MarketSwapExactInputIntentResponse |
   MarketSwapExactOutputIntentResponse |
   LimitSwapExactInputIntentResponse |
   LimitSwapExactOutputIntentResponse
 )
 
-export interface IntentGroupMetadata {
+export interface DeclarationMetadata {
   hash: string
-  swaps?: IntentGroupIntentSwapResponse[] | ProcessError
+  swaps?: DeclarationIntentSwapResponse[] | ProcessError
   requiredTransactions?: (ApprovalResponse | TransactionResponse)[] | ProcessError
   cancel?: TransactionResponse | ProcessError
 	eip712Data?: EIP712TypedData | ProcessError
   eip1271Data?: {} | ProcessError
 }
 
-export interface IntentGroupDataRequest extends IntentGroupRequestBase {
-  intentGroup: IntentGroupArgs
+export interface DeclarationDataRequest extends DeclarationRequestBase {
+  declaration: DeclarationArgs
 }
 
-export interface IntentGroupDataResponse extends IntentGroupMetadata {
-  intentGroup: IntentGroupResponse
+export interface DeclarationDataResponse extends DeclarationMetadata {
+  declaration: DeclarationResponse
 }
 
-export interface StopMarketExactInputIntentGroupRequest extends IntentGroupRequestBase {
+export interface StopMarketExactInputDeclarationRequest extends DeclarationRequestBase {
 	tokenIn: TokenArgs
   tokenOut: TokenArgs
   tokenInAmount: BigIntish
@@ -631,7 +631,7 @@ export interface StopMarketExactInputIntentGroupRequest extends IntentGroupReque
   expiry: BigIntish
 }
 
-export interface StopMarketExactOutputIntentGroupRequest extends IntentGroupRequestBase {
+export interface StopMarketExactOutputDeclarationRequest extends DeclarationRequestBase {
 	tokenIn: TokenArgs
   tokenOut: TokenArgs
   tokenOutAmount: BigIntish
@@ -643,12 +643,12 @@ export interface StopMarketExactOutputIntentGroupRequest extends IntentGroupRequ
   expiry: BigIntish
 }
 
-export type IntentGroupType = 'stop_market' | 'stop_limit' | 'limit' | 'market' | 'custom'
-export type IntentGroupStatus = 'open' | 'filled' | 'cancelled' | 'expired'
-export type IntentGroupSortBy = 'created_time'
-export type IntentGroupSortDirection = 'asc' | 'desc'
+export type DeclarationType = 'stop_market' | 'stop_limit' | 'limit' | 'market' | 'custom'
+export type DeclarationStatus = 'open' | 'filled' | 'cancelled' | 'expired'
+export type DeclarationSortBy = 'created_time'
+export type DeclarationSortDirection = 'asc' | 'desc'
 
-export interface SignedIntentGroupsRequest {
+export interface SignedDeclarationsRequest {
   limit?: number
   offset?: number
   signer?: string
@@ -656,9 +656,9 @@ export interface SignedIntentGroupsRequest {
   segments?: SegmentFunctionName[]
   tokens?: TokenArgs[]
   signatureType?: SignatureType[]
-  status?: IntentGroupStatus[]
-  sortBy?: IntentGroupSortBy
-  sortDirection?: IntentGroupSortDirection
+  status?: DeclarationStatus[]
+  sortBy?: DeclarationSortBy
+  sortDirection?: DeclarationSortDirection
   gasPrice?: BigIntish
 }
 
@@ -672,43 +672,43 @@ export type MinedTransaction = {
 	params?: ContractCallParam[]
 }
 
-export type IntentGroupEventType = 'create' | 'swap' | 'expire' | 'cancel' | 'unknown'
+export type DeclarationEventType = 'create' | 'swap' | 'expire' | 'cancel' | 'unknown'
 
-export interface IntentGroupEventResponse {
-  eventType: IntentGroupEventType
+export interface DeclarationEventResponse {
+  eventType: DeclarationEventType
   success: boolean
   intentIndex?: number
   transaction?: MinedTransaction
 }
 
-export interface SignedIntentGroupResponse extends IntentGroupMetadata {
+export interface SignedDeclarationResponse extends DeclarationMetadata {
   createdAt: string
   expiryTime?: string | ProcessError
-  intentGroup: IntentGroupResponse
-  intentGroupType: IntentGroupType
+  declaration: DeclarationResponse
+  declarationType: DeclarationType
   signer: string
   signature: string
   signatureType: SignatureType
   chainId: string
-  intentGroupContract: string
+  declarationContract: string
   tokens: Record<string, TokenJSON[]>
-  events?: IntentGroupEventResponse[]
+  events?: DeclarationEventResponse[]
 }
 
-export interface SignedIntentGroupsResponse {
+export interface SignedDeclarationsResponse {
   count: number
-  intentGroups: SignedIntentGroupResponse[]
+  declarations: SignedDeclarationResponse[]
 }
 
-export interface SubmitIntentGroupRequest {
-  intentGroup: IntentGroupArgs
+export interface SubmitDeclarationRequest {
+  declaration: DeclarationArgs
   signer: string
   signature: string
   signatureType?: SignatureType
-  intentGroupContract?: string
+  declarationContract?: string
   chainId?: BigIntish
 }
 
-export interface SubmitIntentGroupResponse {
+export interface SubmitDeclarationResponse {
   hash: string
 }
