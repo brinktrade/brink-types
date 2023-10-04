@@ -228,15 +228,15 @@ export type IntentReplay = {
   runs: RunsType
 }
 
-export type IntentSegmentArgs = {
+export type IntentDefinitionArgs = {
   replay?: IntentReplay
   expiryBlock?: BigIntish
   conditions?: ConditionArgs[]
   actions: ActionArgs[]
 }
 
-export type IntentArgs = {
-  segments: IntentSegmentArgs[]
+export type DeclarationDefinitionArgs = {
+  intents: IntentDefinitionArgs[]
   replay?: IntentReplay
   expiryBlock?: BigIntish
 }
@@ -248,12 +248,12 @@ export type SegmentArgs = {
   requiresUnsignedCall?: boolean
 }
 
-export type DeclarationIntentArgs = {
+export type IntentArgs = {
   segments: SegmentArgs[]
 }
 
 export type DeclarationArgs = {
-  intents: DeclarationIntentArgs[]
+  intents: IntentArgs[]
   beforeCalls?: any[]
   afterCalls?: any[]
   segmentsContract?: string,
@@ -278,12 +278,12 @@ export type SegmentJSON = {
   requiresUnsignedCall: boolean
 }
 
-export type DeclarationIntentJSON = {
+export type IntentJSON = {
   segments: SegmentJSON[]
 }
 
 export type DeclarationJSON = {
-  intents: DeclarationIntentJSON[]
+  intents: IntentJSON[]
   beforeCalls: any[]
   afterCalls: any[]
   segmentsContract: string,
@@ -595,7 +595,7 @@ interface DeclarationRequestBase {
   include?: DeclarationRequestInclude[]
 }
 
-export type DeclarationIntentSwapResponse = (
+export type IntentSwapResponse = (
   MarketSwapExactInputIntentResponse |
   MarketSwapExactOutputIntentResponse |
   LimitSwapExactInputIntentResponse |
@@ -604,7 +604,7 @@ export type DeclarationIntentSwapResponse = (
 
 export interface DeclarationMetadata {
   hash: string
-  swaps?: DeclarationIntentSwapResponse[] | ProcessError
+  swaps?: IntentSwapResponse[] | ProcessError
   requiredTransactions?: (ApprovalResponse | TransactionResponse)[] | ProcessError
   cancel?: TransactionResponse | ProcessError
 	eip712Data?: EIP712TypedData | ProcessError
