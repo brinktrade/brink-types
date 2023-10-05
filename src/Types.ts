@@ -469,7 +469,7 @@ export interface MarketSwapExactInputRequest {
 	tokenIn: TokenArgs
 	tokenOut: TokenArgs
   tokenInAmount: BigIntish
-  feePercent: number
+  feePercent: BigIntish
   feeMinTokenOut: BigIntish
   buyer?: string
   gasPrice?: BigIntish
