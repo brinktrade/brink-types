@@ -206,12 +206,13 @@ export interface ActionArgsBase {
 }
 
 export interface MarketSwapActionArgs extends ActionArgsBase {
-  owner: string
-  tokenIn: string | TokenArgs
-  tokenOut: string | TokenArgs
-  tokenInAmount: BigIntish
-  feePercent: number
-  feeMinTokenOut?: BigIntish
+  owner: string;
+  tokenIn: string | TokenArgs;
+  tokenOut: string | TokenArgs;
+  tokenInAmount: BigIntish;
+  fee: number;
+  twapInterval?: BigIntish;
+  twapFeePool?: BigIntish;
 }
 
 export interface LimitSwapActionArgs extends ActionArgsBase {
