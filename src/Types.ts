@@ -847,9 +847,9 @@ export interface GetIntentsFindV1Response extends PaginatedResponse {
 }
 
 // POST /intents/submit/v1
-export type postIntentsSubmitV1Request = SignedDeclarationArgs
+export type PostIntentsSubmitV1Request = SignedDeclarationArgs
 
-export interface postIntentsSubmitV1Response {
+export interface PostIntentsSubmitV1Response {
   hash: string
 }
 
