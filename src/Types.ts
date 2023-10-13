@@ -639,7 +639,7 @@ export interface PaginatedResponse {
 // SIGNERS
 // GET signers/:address/account/v1
 export interface getSignersAccountV1Request extends multichainRequest {}
-export interface getSignerAccountV1Response {
+export interface getSignersAccountV1Response {
   account: string
   deployed: boolean
   deploymentTransaction: string
