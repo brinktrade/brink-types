@@ -623,6 +623,11 @@ export interface OracleResponse {
 export interface multichainRequest {
   chainId?: number
 }
+
+export interface multiSignatureRequest {
+  signer: string,
+  signatureType: SignatureType,
+}
 export interface SortedRequest {
   sortBy?: string
   sortDirection?: 'asc' | 'desc'
@@ -638,18 +643,18 @@ export interface PaginatedResponse {
 
 // SIGNERS
 // GET signers/:address/account/v1
-export interface getSignersAccountV1Request extends multichainRequest {}
-export interface getSignersAccountV1Response {
+export interface GetSignersAccountV1Request extends multichainRequest {}
+export interface GetSignersAccountV1Response {
   account: string
   deployed: boolean
   deploymentTransaction: string
 }
 
 // GET /signers/:address/cancel/v1
-export interface getSignersCancelV1Request extends multichainRequest {
+export interface GetSignersCancelV1Request extends multichainRequest {
   nonce: BigIntish
 }
-export interface getSignersCancelV1Response {
+export interface GetSignersCancelV1Response {
   data: string, 
   functionSignature: string, 
   params: string[], 
@@ -658,75 +663,75 @@ export interface getSignersCancelV1Response {
 }
 
 // GET /signers/:address/cancelWithSignature/v1
-export interface getSignersCancelWithSignatureV1Request {
+export interface GetSignersCancelWithSignatureV1Request {
   nonce: BigIntish
   signature: string
 }
-export type getSignersCancelWithSignatureV1Response = TransactionResponse
+export type GetSignersCancelWithSignatureV1Response = TransactionResponse
 // GET /signers/:address/delegateCall/v1
-export interface getSignersDelegateCallV1Request {
+export interface GetSignersDelegateCallV1Request {
   data: string
   to: string
 }
-export type getSignersDelegateCallV1Response = TransactionResponse
+export type GetSignersDelegateCallV1Response = TransactionResponse
 
 // GET /signers/:address/externalCall/v1
-export interface getSignersExternalCallV1Request {
+export interface GetSignersExternalCallV1Request {
   data: string
   to: string
   value: string
 }
-export type getSignersExternalCallV1Response = TransactionResponse
+export type GetSignersExternalCallV1Response = TransactionResponse
 
 // GET /signers/:address/metaDelegateCall/v1
-export interface getSignersMetaDelegateCallV1Request {
+export interface GetSignersMetaDelegateCallV1Request {
   data: string
   to: string
   deployAccount: boolean
   signature: string
   unsignedData: string
 }
-export type getSignersMetaDelegateCallV1Response = TransactionResponse
+export type GetSignersMetaDelegateCallV1Response = TransactionResponse
 
 // GET /signers/:address/nonce/v1
-export interface getSignersNonceV1Request extends multichainRequest {
+export interface GetSignersNonceV1Request extends multichainRequest {
   nonce: BigIntish
 }
-export interface getSignersNonceV1Response {
+export interface GetSignersNonceV1Response {
   usedByIntents: string[]
   usedOnChain: boolean
 }
 
 // GET signers/:address/nonces/v1
-export interface getSignersNoncesV1Request extends multichainRequest {
+export interface GetSignersNoncesV1Request extends multichainRequest {
   count: number
 }
-export interface getSignersNoncesV1Response {
+export interface GetSignersNoncesV1Response {
   nonces: BigIntish[]
 }
 
 // SEGMENTS
 // GET /segments/blockInterval/v1
-
-
-export interface getSegmentsBlockIntervalV1Request {
+export interface GetSegmentsBlockIntervalV1Request {
   signer: string
   id: BigIntish
   initialStart: BigIntish
   intervalMinSize: BigIntish
   maxIntervals: BigIntish
 }
-export interface getSegmentsBlockIntervalV1Response extends RequireCheckResponse {
+export interface GetSegmentsBlockIntervalV1Response extends RequireCheckResponse {
   intervalReady: boolean
+  intervalReadyBlock: BigIntish
+  currentBlockNumber: BigIntish
   maxIntervalsExceeded: boolean
   state: {
-    start: number
-    counter: number
+    start: BigIntish
+    counter: BigIntish
   }  
 }
 
 // GET /segments/limitSwapExactInput/v1
-export interface getSegmentsLimitSwapExactInputV1Request {
+export interface GetSegmentsLimitSwapExactInputV1Request {
   priceCurveParams: string
   priceCurveAddress: string
   include: 'estimates' | 'routes'
@@ -735,13 +740,13 @@ export interface getSegmentsLimitSwapExactInputV1Request {
   tokenOut: string
   buyer?: string;
 }
-export interface getSegmentsLimitSwapExactInputV1Response {
+export interface GetSegmentsLimitSwapExactInputV1Response {
   estimates?: LimitSwapInputEstimates
   routes?: RouteSegment[]
 }
 
 // GET segments/marketSwapExactInput/v1
-export interface getSegmentsMarketSwapExactInputV1Request {
+export interface GetSegmentsMarketSwapExactInputV1Request {
   tokenIn: string
   tokenInAmount: string
   tokenOut: string
@@ -750,56 +755,56 @@ export interface getSegmentsMarketSwapExactInputV1Request {
   buyer?: string
   include: 'estimates' | 'routes'
 }
-export interface getSegmentsMarketSwapExactInputV1Response {
+export interface GetSegmentsMarketSwapExactInputV1Response {
   estimates?: MarketSwapInputEstimate
   routes?: RouteSegment[]
 }
 
 // GET /segments/useBit/v1
-export interface getSegmentsUseBitV1Request {
+export interface GetSegmentsUseBitV1Request {
   bitmapIndex: BigIntish
   bit: BigIntish
   signer: string
 }
 
-export interface getSegmentsUseBitV1Response extends RequireCheckResponse {
+export interface GetSegmentsUseBitV1Response extends RequireCheckResponse {
   bitUsed: boolean
 }
 
 // GET /segments/requireBlockNotMined/v1
-export interface getSegmentsRequireBlockNotMinedV1Request {
+export interface GetSegmentsRequireBlockNotMinedV1Request {
   blockNumber: BigIntish
 }
-export interface getSegmentsRequireBlockNotMinedV1Response extends RequireCheckResponse {
+export interface GetSegmentsRequireBlockNotMinedV1Response extends RequireCheckResponse {
   currentBlock: BigIntish
 }
 
 // GET /segments/requireUint256LowerBound/v1
-export interface getSegmentsRequireUint256LowerBoundV1Request extends OracleCall {
+export interface GetSegmentsRequireUint256LowerBoundV1Request extends OracleCall {
   lowerBound: BigIntish
 }
-export interface getSegmentsRequireUint256LowerBoundV1Response extends OracleResponse, RequireCheckResponse {}
+export interface GetSegmentsRequireUint256LowerBoundV1Response extends OracleResponse, RequireCheckResponse {}
 
 // INTENTS
 // GET /intents/declarations/:hash/v1
-export interface getIntentsDeclarationsHashV1Request {
+export interface GetIntentsDeclarationsV1Request {
   includes?: SignedDeclarationRequestsInclude[]
 }
-export type getIntentsDeclarationsV1Response = SignedDeclarationResponse
+export type GetIntentsDeclarationsV1Response = SignedDeclarationResponse
 
 // GET /intents/declarations/find/v1
-export interface getIntentsDeclarationsFindV1Request extends PaginatedRequest {
+export interface GetIntentsDeclarationsFindV1Request extends PaginatedRequest {
   includes?: SignedDeclarationRequestsInclude[]
 }
-export interface getIntentsDeclarationsFindV1Response extends PaginatedResponse {
+export interface GetIntentsDeclarationsFindV1Response extends PaginatedResponse {
   declarations: SignedDeclarationResponse[]
 }
 // GET /intents/:intentId/v1
-export interface getIntentsV1Request {
+export interface GetIntentsV1Request {
   includes?: SwapRequestInclude[]
 }
 
-export interface getIntentsV1Response { 
+export interface GetIntentsV1Response { 
   createdTime: string
   declarationHash: string,
   declarationType: DeclarationType,
@@ -811,11 +816,11 @@ export interface getIntentsV1Response {
 }
 
 // GET /intents/compile/v1
-export interface getIntentsCompileV1Request {
+export interface GetIntentsCompileV1Request extends multichainRequest, multiSignatureRequest {
   declaration: DeclarationArgs | DeclarationDefinitionArgs
   include?: DeclarationRequestInclude[]
 }
-export interface getIntentsCompileV1Response {
+export interface GetIntentsCompileV1Response {
   declaration: DeclarationResponse
   requiredTransactions?: (ApprovalResponse | TransactionResponse)[] | ProcessError
   cancel?: TransactionResponse | ProcessError
@@ -824,14 +829,14 @@ export interface getIntentsCompileV1Response {
 }
 
 // GET /intents/find/v1
-export interface getIntentsFindV1Request extends PaginatedRequest, SortedRequest, multichainRequest {
+export interface GetIntentsFindV1Request extends PaginatedRequest, SortedRequest, multichainRequest {
   creationTimeAfter?: string
   creationTimeBefore?: string
   requeueTimeAfter?: string
   requeueTimeBefore?: string
 
 }
-export interface getIntentsFindV1Response extends PaginatedResponse {
+export interface GetIntentsFindV1Response extends PaginatedResponse {
   intents: {
     intentId: number
     declarationId: number
@@ -842,7 +847,7 @@ export interface getIntentsFindV1Response extends PaginatedResponse {
 }
 
 // POST /intents/submit/v1
-export type postIntentsSubmitV1Request = DeclarationArgs | DeclarationDefinitionArgs
+export type postIntentsSubmitV1Request = SignedDeclarationArgs
 
 export interface postIntentsSubmitV1Response {
   hash: string
@@ -850,18 +855,20 @@ export interface postIntentsSubmitV1Response {
 
 // ORACLES
 // GET /oracles/uint256Oracle/value/v1
-export interface getOraclesUint256OracleValueV1Request extends OracleCall {}
-export interface getOraclesUint256OracleValueV1Response extends OracleResponse {}
+export interface GetOraclesUint256OracleValueV1Request extends OracleCall {}
+export interface GetOraclesUint256OracleValueV1Response extends OracleResponse {}
 
 // GET /oracles/uniV3TWAP/v1
-export interface getOraclesUniV3TWAPV1Request extends TWapRequest {
+export interface GetOraclesUniV3TWAPV1Request extends TWapRequest {
   fee: number
 }
-export interface getOraclesUniV3TWAPV1Response extends OracleCall {}
+export interface GetOraclesUniV3TWAPV1Response extends OracleCall {}
 
 // GET /oracles/uniV3TWAP/price/v1
-export interface getOraclesUniV3TWAPPriceV1Request extends TWapRequest {}
-export interface getOraclesUniV3TWAPPriceV1Response {
+export interface GetOraclesUniV3TWAPPriceV1Request extends TWapRequest {}
+export interface GetOraclesUniV3TWAPPriceV1Response {
+  fee: BigIntish
+  poolAddress: string
   priceDecimal: number
   priceUintX96: string
 }
