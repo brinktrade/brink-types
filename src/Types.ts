@@ -560,6 +560,7 @@ export interface DeclarationEventResponse {
 // API BASE TYPES
 
 export type DeclarationType = 
+  'dca' |
   'stop_market' |
   'stop_limit' |
   'limit' |
