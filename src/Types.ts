@@ -589,6 +589,11 @@ export interface DeclarationMetadata {
   eip1271Data?: {} | ProcessError
 }
 
+export interface NoncesResponse {
+  nonce: BigIntish
+  bit: Bit
+}
+
 export interface SignedDeclarationResponse extends DeclarationMetadata {
   createdAt: string
   expiryTime?: string | ProcessError
@@ -599,7 +604,8 @@ export interface SignedDeclarationResponse extends DeclarationMetadata {
   signatureType: SignatureType
   chainId: string
   declarationContract: string
-  tokens: Record<string, TokenJSON[]>
+  tokens: Record<string, TokenJSON>[]
+  nonces: NoncesResponse[]
   events?: DeclarationEventResponse[]
 }
 
