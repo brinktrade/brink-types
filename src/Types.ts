@@ -13,7 +13,10 @@ export enum SignatureTypeEnum {
   EIP1271 = 1
 }
 
-export type SignatureType = 'EIP712' | 'EIP1271'
+export enum SignatureType {
+    EIP712 = 'EIP712',
+    EIP1271 = 'EIP1271'
+}
 
 export enum TokenStandard {
   ERC20 = 0,
@@ -22,14 +25,20 @@ export enum TokenStandard {
   ETH = 3
 }
 
-export type BlockState = 'MINED' | 'NOT_MINED'
+export enum BlockState {
+    MINED = 'MINED',
+    NOT_MINED = 'NOT_MINED'
+}
 
 export enum NonceState {
     USED = 'USED',
     NOT_USED = 'NOT_USED'
 }
 
-export type RunsType = 'ONCE' | 'UNTIL_CANCELLED'
+export enum RunsType {
+    ONCE = 'ONCE',
+    UNTIL_CANCELLED = 'UNTIL_CANCELLED'
+}
 
 export enum PriceOperator {
     GREATER_THAN = 'gt',
@@ -192,7 +201,7 @@ export interface IntervalConditionArgs extends ConditionArgsBase {
 }
 
 export interface BlockConditionArgs extends ConditionArgsBase {
-  state: BlockState
+  state: `${BlockState}`
   blockNumber: BigIntish
 }
 
@@ -227,7 +236,7 @@ export interface LimitSwapActionArgs extends ActionArgsBase {
 
 export type IntentReplay = {
   nonce: BigIntish
-  runs: RunsType
+  runs: `${RunsType}`
 }
 
 export type IntentDefinitionArgs = {
@@ -268,7 +277,7 @@ export type SignedDeclarationArgs = {
   signature: string
   declaration: DeclarationArgs
   declarationContract?: string
-  signatureType?: SignatureType
+  signatureType?: `${SignatureType}`
   eip712Data?: EIP712TypedData
   account?: string
 }
@@ -297,7 +306,7 @@ export type SignedDeclarationJSON = {
   account: string
   chainId: number
   signer: string
-  signatureType: SignatureType
+  signatureType: `${SignatureType}`
   signature: string
   declaration: DeclarationJSON
   declarationContract: string
@@ -596,7 +605,7 @@ export interface SignedDeclarationResponse extends DeclarationMetadata {
   declarationType: DeclarationType
   signer: string
   signature: string
-  signatureType: SignatureType
+  signatureType: `${SignatureType}`
   chainId: string
   declarationContract: string
   tokens: Record<string, TokenJSON[]>
@@ -627,7 +636,7 @@ export interface multichainRequest {
 
 export interface multiSignatureRequest {
   signer: string,
-  signatureType: SignatureType,
+  signatureType: `${SignatureType}`,
 }
 export interface SortedRequest {
   sortBy?: string
