@@ -567,6 +567,7 @@ export interface DeclarationEventResponse {
 }
 
 // API BASE TYPES
+export type RoutingSource = 'odos' | 'uniswap'
 
 export type DeclarationType = 
   'dca' |
@@ -655,6 +656,16 @@ export interface PaginatedRequest {
 
 export interface PaginatedResponse {
   count: number
+}
+export interface RoutingRequest {
+  source?: RoutingSource
+  buyer?: RoutingSource
+  include?: 'estimates' | 'routes'
+}
+
+export interface RoutingResponse {
+  estimates?: LimitSwapInputEstimates
+  routes?: RouteSegment[]
 }
 
 // SIGNERS
@@ -747,34 +758,24 @@ export interface GetSegmentsBlockIntervalV1Response extends RequireCheckResponse
 }
 
 // GET /segments/limitSwapExactInput/v1
-export interface GetSegmentsLimitSwapExactInputV1Request {
+export interface GetSegmentsLimitSwapExactInputV1Request extends RoutingRequest {
   priceCurveParams: string
   priceCurveAddress: string
-  include: 'estimates' | 'routes'
   tokenIn: string
   tokenInAmount: string
   tokenOut: string
-  buyer?: string;
 }
-export interface GetSegmentsLimitSwapExactInputV1Response {
-  estimates?: LimitSwapInputEstimates
-  routes?: RouteSegment[]
-}
+export interface GetSegmentsLimitSwapExactInputV1Response extends RoutingResponse {}
 
 // GET segments/marketSwapExactInput/v1
-export interface GetSegmentsMarketSwapExactInputV1Request {
+export interface GetSegmentsMarketSwapExactInputV1Request extends RoutingRequest {
   tokenIn: string
   tokenInAmount: string
   tokenOut: string
   feePercent: string
   feeMinTokenOut: string
-  buyer?: string
-  include: 'estimates' | 'routes'
 }
-export interface GetSegmentsMarketSwapExactInputV1Response {
-  estimates?: MarketSwapInputEstimate
-  routes?: RouteSegment[]
-}
+export interface GetSegmentsMarketSwapExactInputV1Response extends RoutingResponse {}
 
 // GET /segments/useBit/v1
 export interface GetSegmentsUseBitV1Request {
