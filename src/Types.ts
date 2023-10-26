@@ -658,8 +658,8 @@ export interface PaginatedResponse {
   count: number
 }
 export interface RoutingRequest {
-  source?: RoutingSource
-  buyer?: RoutingSource
+  sources?: RoutingSource[]
+  buyer?: string
   include?: 'estimates' | 'routes'
 }
 
