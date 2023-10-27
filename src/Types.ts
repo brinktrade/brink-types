@@ -638,7 +638,7 @@ export interface OracleResponse {
   oracleValue: BigIntish
 }
 export interface multichainRequest {
-  chainId?: number
+  chainId: number
 }
 
 export interface multiSignatureRequest {
