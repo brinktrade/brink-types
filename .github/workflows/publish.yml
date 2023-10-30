@@ -1,12 +1,13 @@
 name: Release and Publish
 
-# This workflow triggers on pushes to the master branch
+# # This workflow triggers on pushes to the master branch
 # on:
 #   push:
 #     branches:
 #       - master
 
-on: [push, pull_request]
+on: [pull_request]
+
 
 jobs:
   build-and-publish:
@@ -76,9 +77,9 @@ jobs:
 
         echo "::set-output name=exists::$VERSION_EXISTS"
 
-    # # Publishes the project to npm
-    # - name: Publish to npm
-    #   if: steps.check_npm_version.outputs.exists == '0'
-    #   run: npm publish
-    #   env:
-    #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+    # Publishes the project to npm
+    - name: Publish to npm
+      if: steps.check_npm_version.outputs.exists == '0'
+      run: npm publish
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
