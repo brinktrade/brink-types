@@ -6,9 +6,11 @@
   "main": "dist/Types.js",
   "types": "dist/Types.d.ts",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "release": "standard-version --skip.changelog --skip.commit --skip.tag"
   },
   "dependencies": {
+    "standard-version": "^9.5.0",
     "typescript": "^5.0.4"
   }
 }
