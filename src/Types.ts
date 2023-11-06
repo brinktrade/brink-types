@@ -240,6 +240,7 @@ export type IntentReplay = {
 }
 
 export type IntentDefinitionArgs = {
+  chainId?: number
   replay?: IntentReplay
   expiryBlock?: BigIntish
   conditions?: ConditionArgs[]
@@ -247,6 +248,7 @@ export type IntentDefinitionArgs = {
 }
 
 export type DeclarationDefinitionArgs = {
+  chainId: number
   intents: IntentDefinitionArgs[]
   replay?: IntentReplay
   expiryBlock?: BigIntish
