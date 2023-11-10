@@ -704,6 +704,14 @@ export interface GetSignersDelegateCallV1Request {
   data: string
   to: string
 }
+
+export interface GetSignersEIP712TypedDataV1Request {
+  nonce: BigIntish
+  chainId: number
+}
+
+export type GetSignersEIP712TypedDataV1Response = EIP712TypedData
+
 export type GetSignersDelegateCallV1Response = TransactionResponse
 
 // GET /signers/:address/externalCall/v1
