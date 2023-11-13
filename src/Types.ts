@@ -811,7 +811,12 @@ export interface GetIntentsDeclarationsV1Request {
 export type GetIntentsDeclarationsV1Response = SignedDeclarationResponse
 
 // GET /intents/declarations/find/v1
-export interface GetIntentsDeclarationsFindV1Request extends PaginatedRequest {
+export interface GetIntentsDeclarationsFindV1Request extends PaginatedRequest, SortedRequest {
+  hash?: string
+  signatureType?: string
+  signer?: string
+  source: string
+  tokenAddress: string | string[]
   includes?: SignedDeclarationRequestsInclude[]
 }
 export interface GetIntentsDeclarationsFindV1Response extends PaginatedResponse {
