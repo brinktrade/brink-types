@@ -616,7 +616,8 @@ export interface SignedDeclarationResponse extends DeclarationMetadata {
   declarationContract: string
   tokens: Record<string, TokenJSON>[]
   nonces: NoncesResponse[]
-  events?: DeclarationEventResponse[]
+  events?: DeclarationEventResponse[],
+  source?: string
 }
 
 export interface RequireCheckResponse {
@@ -864,7 +865,9 @@ export interface GetIntentsFindV1Response extends PaginatedResponse {
 }
 
 // POST /intents/submit/v1
-export type PostIntentsSubmitV1Request = SignedDeclarationArgs
+export interface PostIntentsSubmitV1Request extends SignedDeclarationArgs {
+  source?: string
+}
 
 export interface PostIntentsSubmitV1Response {
   hash: string
