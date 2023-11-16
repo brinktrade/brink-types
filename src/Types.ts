@@ -417,6 +417,7 @@ export type RouteSegment = {
 	tokenInAmount: string
 	tokenOutAmount: string
   gas: string
+  source?: string
 }
 
 export type TokenValue = {[key: string]: string}
