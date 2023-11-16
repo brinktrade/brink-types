@@ -196,8 +196,8 @@ export interface PriceConditionArgs extends ConditionArgsBase {
 export interface IntervalConditionArgs extends ConditionArgsBase {
   id: BigIntish
 	interval: BigIntish
-	startBlock?: BigIntish
-	maxIntervals?: BigIntish
+	startBlock?: BigIntish  | null
+	maxIntervals?: BigIntish | null
 }
 
 export interface BlockConditionArgs extends ConditionArgsBase {
@@ -220,8 +220,8 @@ export interface MarketSwapActionArgs extends ActionArgsBase {
   tokenOut: string | TokenArgs;
   tokenInAmount: BigIntish;
   fee: number;
-  twapInterval?: BigIntish;
-  twapFeePool?: BigIntish;
+  twapInterval?: BigIntish | null
+  twapFeePool?: BigIntish | null
 }
 
 export interface LimitSwapActionArgs extends ActionArgsBase {
@@ -230,7 +230,7 @@ export interface LimitSwapActionArgs extends ActionArgsBase {
   tokenIn: string | TokenArgs
   tokenOut: string | TokenArgs
   tokenInAmount: BigIntish
-  tokenOutAmount?: BigIntish
+  tokenOutAmount?: BigIntish | null
   price?: number
 }
 
@@ -240,25 +240,25 @@ export type IntentReplay = {
 }
 
 export type IntentDefinitionArgs = {
-  chainId?: number
-  replay?: IntentReplay
-  expiryBlock?: BigIntish
-  conditions?: ConditionArgs[]
+  chainId?: number | null
+  replay?: IntentReplay | null
+  expiryBlock?: BigIntish | null
+  conditions?: ConditionArgs[] | null
   actions: ActionArgs[]
 }
 
 export type DeclarationDefinitionArgs = {
   chainId: number
   intents: IntentDefinitionArgs[]
-  replay?: IntentReplay
+  replay?: IntentReplay | null
   expiryBlock?: BigIntish
 }
 
 export type SegmentArgs = {
   functionName: SegmentFunctionName
   params: Record<string, SegmentParamValue>
-  data?: string
-  requiresUnsignedCall?: boolean
+  data?: string | null
+  requiresUnsignedCall?: boolean | null
 }
 
 export type IntentArgs = {
@@ -269,8 +269,8 @@ export type DeclarationArgs = {
   intents: IntentArgs[]
   beforeCalls?: any[]
   afterCalls?: any[]
-  segmentsContract?: string,
-  data?: string
+  segmentsContract?: string | null,
+  data?: string | null
 }
 
 export type SignedDeclarationArgs = {
@@ -278,10 +278,10 @@ export type SignedDeclarationArgs = {
   chainId: number
   signature: string
   declaration: DeclarationArgs
-  declarationContract?: string
+  declarationContract?: string | null
   signatureType?: `${SignatureType}`
-  eip712Data?: EIP712TypedData
-  account?: string
+  eip712Data?: EIP712TypedData | null
+  account?: string | null
 }
 
 export type SegmentJSON = {
@@ -483,13 +483,13 @@ export interface MarketSwapExactInputRequest {
   tokenInAmount: BigIntish
   feePercent: BigIntish
   feeMinTokenOut: BigIntish
-  buyer?: string
-  gasPrice?: BigIntish
-  include?: SwapRequestInclude[]
+  buyer?: string | null
+  gasPrice?: BigIntish | null
+  include?: SwapRequestInclude[] | null
 }
 
 export interface MarketSwapExactInputResponse extends SwapResponse {
-  estimates?: MarketSwapInputEstimate | ProcessError
+  estimates?: MarketSwapInputEstimate | ProcessError | null
 }
 
 export interface MarketSwapExactOutputRequest {
@@ -498,9 +498,9 @@ export interface MarketSwapExactOutputRequest {
   tokenInAmount: BigIntish
   feePercent: BigIntish
   feeMinTokenOut: BigIntish
-  buyer?: string
-  gasPrice?: BigIntish
-  include?: SwapRequestInclude[]
+  buyer?: string | null
+  gasPrice?: BigIntish | null
+  include?: SwapRequestInclude[] | null
 }
 
 export interface MarketSwapExactOutputResponse extends SwapResponse {
@@ -512,9 +512,9 @@ export interface LimitSwapExactInputRequest {
 	tokenOut: TokenArgs
   tokenInAmount: BigIntish
   priceCurve: OracleJSON
-  buyer?: string
-  gasPrice?: BigIntish
-  include?: SwapRequestInclude[]
+  buyer?: string | null
+  gasPrice?: BigIntish | null
+  include?: SwapRequestInclude[] | null
 }
 
 export interface LimitSwapExactInputResponse extends SwapResponse {
@@ -526,9 +526,9 @@ export interface LimitSwapExactOutputRequest {
 	tokenOut: TokenArgs
   tokenOutAmount: BigIntish
   priceCurve: OracleJSON
-  buyer?: string
-  gasPrice?: BigIntish
-  include?: SwapRequestInclude[]
+  buyer?: string | null
+  gasPrice?: BigIntish | null
+  include?: SwapRequestInclude[] | null
 }
 
 export interface LimitSwapExactOutputResponse extends SwapResponse {
@@ -650,21 +650,21 @@ export interface multiSignatureRequest {
   signatureType: `${SignatureType}`,
 }
 export interface SortedRequest {
-  sortBy?: string
-  sortDirection?: 'asc' | 'desc'
+  sortBy?: string | null
+  sortDirection?: 'asc' | 'desc' | null
 }
 export interface PaginatedRequest {
-  limit?: number
-  offset?: number
+  limit?: number | null
+  offset?: number | null
 }
 
 export interface PaginatedResponse {
   count: number
 }
 export interface RoutingRequest {
-  sources?: RoutingSource[]
-  buyer?: string
-  include?: 'estimates' | 'routes'
+  sources?: RoutingSource[] | null
+  buyer?: string | null
+  include?: 'estimates' | 'routes' | null
 }
 
 export interface RoutingResponse {
@@ -817,25 +817,25 @@ export interface GetSegmentsRequireUint256LowerBoundV1Response extends OracleRes
 // INTENTS
 // GET /intents/declarations/:hash/v1
 export interface GetIntentsDeclarationsV1Request {
-  includes?: SignedDeclarationRequestsInclude[]
+  includes?: SignedDeclarationRequestsInclude[] | null
 }
 export type GetIntentsDeclarationsV1Response = SignedDeclarationResponse
 
 // GET /intents/declarations/find/v1
 export interface GetIntentsDeclarationsFindV1Request extends PaginatedRequest, SortedRequest {
-  hash?: string
-  signatureType?: string
-  signer?: string
+  hash?: string | null
+  signatureType?: string | null
+  signer?: string | null
   source: string
   tokenAddress: string | string[]
-  includes?: SignedDeclarationRequestsInclude[]
+  includes?: SignedDeclarationRequestsInclude[] | null
 }
 export interface GetIntentsDeclarationsFindV1Response extends PaginatedResponse {
   declarations: SignedDeclarationResponse[]
 }
 // GET /intents/:intentId/v1
 export interface GetIntentsV1Request {
-  includes?: SwapRequestInclude[]
+  includes?: SwapRequestInclude[] | null
 }
 
 export interface GetIntentsV1Response { 
@@ -852,7 +852,7 @@ export interface GetIntentsV1Response {
 // GET /intents/compile/v1
 export interface GetIntentsCompileV1Request extends multichainRequest, multiSignatureRequest {
   declaration: DeclarationArgs | DeclarationDefinitionArgs
-  include?: DeclarationRequestInclude[]
+  include?: DeclarationRequestInclude[] | null
 }
 export interface GetIntentsCompileV1Response {
   declaration: DeclarationResponse
@@ -864,10 +864,10 @@ export interface GetIntentsCompileV1Response {
 
 // GET /intents/find/v1
 export interface GetIntentsFindV1Request extends PaginatedRequest, SortedRequest, multichainRequest {
-  creationTimeAfter?: string
-  creationTimeBefore?: string
-  requeueTimeAfter?: string
-  requeueTimeBefore?: string
+  creationTimeAfter?: string | null
+  creationTimeBefore?: string | null
+  requeueTimeAfter?: string | null
+  requeueTimeBefore?: string | null
 
 }
 export interface GetIntentsFindV1Response extends PaginatedResponse {
@@ -882,7 +882,7 @@ export interface GetIntentsFindV1Response extends PaginatedResponse {
 
 // POST /intents/submit/v1
 export interface PostIntentsSubmitV1Request extends SignedDeclarationArgs {
-  source?: string
+  source?: string | null
 }
 
 export interface PostIntentsSubmitV1Response {
