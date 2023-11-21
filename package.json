@@ -1,6 +1,6 @@
 {
   "name": "@brinkninja/types",
-  "version": "0.10.3",
+  "version": "0.10.4",
   "description": "TypeScript types for Brink",
   "license": "GPL-3.0-or-later",
   "main": "dist/Types.js",
