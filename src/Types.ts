@@ -572,14 +572,6 @@ export interface DeclarationEventResponse {
 // API BASE TYPES
 export type RoutingSource = 'odos' | 'uniswap'
 
-export type DeclarationType = 
-  'dca' |
-  'stop_market' |
-  'stop_limit' |
-  'limit' |
-  'market' |
-  'custom'
-
 export type DeclarationStatus =
   'open' |
   'filled' |
@@ -611,7 +603,6 @@ export interface SignedDeclarationResponse extends DeclarationMetadata {
   createdAt: string
   expiryTime?: string | ProcessError
   declaration: DeclarationResponse
-  declarationType: DeclarationType
   signer: string
   signature: string
   signatureType: `${SignatureType}`
@@ -841,7 +832,6 @@ export interface GetIntentsV1Request {
 export interface GetIntentsV1Response { 
   createdTime: string
   declarationHash: string,
-  declarationType: DeclarationType,
   intentId: string,
   intentIndex: number,
   requeueTime: string,
