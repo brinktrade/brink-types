@@ -572,14 +572,6 @@ export interface DeclarationEventResponse {
 // API BASE TYPES
 export type RoutingSource = 'odos' | 'uniswap'
 
-export type DeclarationType = 
-  'dca' |
-  'stop_market' |
-  'stop_limit' |
-  'limit' |
-  'market' |
-  'custom'
-
 export type DeclarationStatus =
   'open' |
   'filled' |
@@ -607,19 +599,48 @@ export interface NoncesResponse {
   bit: Bit
 }
 
+export interface IntentNonceResponse  extends NoncesResponse {
+  segmentIndex: number
+}
+
+export interface DeclarationNonceResponse extends IntentNonceResponse {
+  intentIndex: number
+}
+
+export interface TransactionHashResponse {
+  hash: string
+}
+
+export interface DeclarationTransactionHashResponse extends TransactionHashResponse {
+  intentIndex: number
+}
+
+export interface TokenResponse {
+  paramName: string
+  tokenData: TokenJSON
+}
+
+export interface IntentTokenResponse  extends TokenResponse {
+  segmentIndex: number
+}
+
+export interface DeclarationTokenResponse extends IntentTokenResponse {
+  intentIndex: number
+}
+
 export interface SignedDeclarationResponse extends DeclarationMetadata {
   createdAt: string
   expiryTime?: string | ProcessError
   declaration: DeclarationResponse
-  declarationType: DeclarationType
   signer: string
   signature: string
   signatureType: `${SignatureType}`
   chainId: string
   declarationContract: string
-  tokens: Record<string, TokenJSON>[]
-  nonces: NoncesResponse[]
-  events?: DeclarationEventResponse[],
+  tokens: DeclarationTokenResponse[]
+  nonces: DeclarationNonceResponse[]
+  transactions: DeclarationTransactionHashResponse[]
+  events?: DeclarationEventResponse[]
   source?: string
 }
 
@@ -841,12 +862,14 @@ export interface GetIntentsV1Request {
 export interface GetIntentsV1Response { 
   createdTime: string
   declarationHash: string,
-  declarationType: DeclarationType,
   intentId: string,
   intentIndex: number,
   requeueTime: string,
   segments: SegmentResponse[],
   status: { message: 'Not implemented' },
+  transactions: TransactionHashResponse[],
+  nonces: IntentNonceResponse[],
+  tokens: IntentTokenResponse[],
 }
 
 // GET /intents/compile/v1
