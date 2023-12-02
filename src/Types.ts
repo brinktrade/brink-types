@@ -278,7 +278,7 @@ export type SignedDeclarationArgs = {
   chainId: number
   signature: string
   declaration: DeclarationArgs
-  declarationContract?: string | null
+  declarationContract: string
   signatureType?: `${SignatureType}`
   eip712Data?: EIP712TypedData | null
   account?: string | null
