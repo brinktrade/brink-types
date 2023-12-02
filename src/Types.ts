@@ -267,9 +267,9 @@ export type IntentArgs = {
 
 export type DeclarationArgs = {
   intents: IntentArgs[]
+  segmentsContract: string
   beforeCalls?: any[]
   afterCalls?: any[]
-  segmentsContract?: string | null,
   data?: string | null
 }
 
