@@ -144,7 +144,8 @@ export type SegmentFunctionName =
   'requireUint256LowerBound' |
   'requireUint256UpperBound' |
   'limitSwapExactInput' |
-  'blockInterval'
+  'blockInterval' |
+  'swap01'
 
 export type SegmentType =
   'swap' |
