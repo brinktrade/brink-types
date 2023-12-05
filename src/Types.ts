@@ -880,6 +880,7 @@ export interface GetIntentsCompileV1Request extends multichainRequest, multiSign
 }
 export interface GetIntentsCompileV1Response {
   declaration: DeclarationResponse
+  declarationContract: string
   requiredTransactions?: (ApprovalResponse | TransactionResponse)[] | ProcessError
   cancel?: TransactionResponse | ProcessError
 	eip712Data?: EIP712TypedData | ProcessError
