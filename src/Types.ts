@@ -2,9 +2,9 @@ export type ContractCallParam = bigint | boolean | string | SignatureTypeEnum | 
 
 export type RpcMethodCallParam = number | boolean | string
 
-export type SegmentParamValue = ContractCallParam | OracleJSON | TokenJSON | IdsProofJSON | FillStateParamsJSON | BitJSON
+export type SegmentParamValue = ContractCallParam | OracleJSON | TokenJSON | IdsProofJSON | FillStateParamsJSON | BitJSON | SwapAmountArgs
 
-export type SegmentParamJSON = boolean | string | number | SignatureTypeEnum | OracleJSON | TokenJSON | IdsProofJSON | FillStateParamsJSON | BitJSON
+export type SegmentParamJSON = boolean | string | number | SignatureTypeEnum | OracleJSON | TokenJSON | IdsProofJSON | FillStateParamsJSON | BitJSON | SwapAmountJSON
 
 export type BigIntish = bigint | string | number
 
@@ -132,6 +132,25 @@ export type TokenAmount = {
 export type Bit = {
   index: bigint
   value: bigint
+}
+
+export type SwapAmountContractName =
+  'FixedSwapAmount01' |
+  'BlockIntervalDutchAuctionAmount01'
+
+export type SwapAmountArgs = {
+  contractAddress?: string
+  contractName?: SwapAmountContractName
+  paramsBytesData?: string
+  params?: ContractCallParam[]
+}
+
+export type SwapAmountJSON = {
+  contractAddress: string
+  contractName: SwapAmountContractName
+  paramsBytesData: string
+  params: ContractCallParam[]
+  paramTypes: SolidityFunctionParamType[]
 }
 
 export type SegmentFunctionName = 
@@ -364,6 +383,11 @@ export type TransactionData = {
 export type CallData = {
   to: string,
   data: string
+}
+
+export type SolidityFunctionParamType = {
+  name: string
+  type: string
 }
 
 export type ParamType = {
