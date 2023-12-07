@@ -182,6 +182,7 @@ export type ConditionType =
   'nonce'
 
 export type ActionType =
+  'blockIntervalDutchAuctionSwap' |
   'limitSwap' |
   'marketSwap'
 
@@ -194,7 +195,8 @@ export type ConditionArgs =
 
 export type ActionArgs =
   LimitSwapActionArgs |
-  MarketSwapActionArgs
+  MarketSwapActionArgs |
+  BlockIntervalDutchAuctionSwapActionArgs
 
 export interface ConditionArgsBase {
   type: ConditionType
@@ -252,6 +254,22 @@ export interface LimitSwapActionArgs extends ActionArgsBase {
   tokenInAmount: BigIntish
   tokenOutAmount?: BigIntish | null
   price?: number
+}
+
+export interface BlockIntervalDutchAuctionSwapActionArgs extends ActionArgsBase {
+  owner: string
+  tokenIn: string | TokenWithDecimalsArgs
+  tokenOut: string | TokenWithDecimalsArgs
+  tokenInAmount: BigIntish
+  intervalId: BigIntish
+  firstAuctionStartBlock: BigIntish
+  auctionInterval: BigIntish
+  auctionDuration: BigIntish
+  startPercent: number
+  endPercent: number
+  maxAuctions?: BigIntish
+  twapInterval?: BigIntish
+  twapFeePool?: BigIntish
 }
 
 export type IntentReplay = {
