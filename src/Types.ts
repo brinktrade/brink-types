@@ -153,18 +153,19 @@ export type SwapAmountJSON = {
   paramTypes: SolidityFunctionParamType[]
 }
 
-export type SegmentFunctionName = 
-  'useBit' |
-  'marketSwapExactInput' |
-  'requireBitUsed' |
-  'requireBitNotUsed' |
-  'requireBlockNotMined' |
-  'requireBlockMined' |
-  'requireUint256LowerBound' |
-  'requireUint256UpperBound' |
-  'limitSwapExactInput' |
-  'blockInterval' |
-  'swap01'
+export enum SegmentFunctionName {
+  useBit = 'useBit',
+  marketSwapExactInput = 'marketSwapExactInput',
+  requireBitUsed = 'requireBitUsed',
+  requireBitNotUsed = 'requireBitNotUsed',
+  requireBlockNotMined = 'requireBlockNotMined',
+  requireBlockMined = 'requireBlockMined',
+  requireUint256LowerBound = 'requireUint256LowerBound',
+  requireUint256UpperBound = 'requireUint256UpperBound',
+  limitSwapExactInput = 'limitSwapExactInput',
+  blockInterval = 'blockInterval',
+  swap01 = 'swap01'
+}
 
 export type SegmentType =
   'swap' |
@@ -293,7 +294,7 @@ export type DeclarationDefinitionArgs = {
 }
 
 export type SegmentArgs = {
-  functionName: SegmentFunctionName
+  functionName: `${SegmentFunctionName}`
   params: Record<string, SegmentParamValue>
   data?: string | null
   requiresUnsignedCall?: boolean | null
@@ -323,7 +324,7 @@ export type SignedDeclarationArgs = {
 }
 
 export type SegmentJSON = {
-  functionName: SegmentFunctionName
+  functionName: `${SegmentFunctionName}`
   params: Record<string, SegmentParamJSON>
   data: string
   requiresUnsignedCall: boolean
@@ -494,7 +495,7 @@ export interface LimitSwapInputEstimates {
 }
 
 export type SegmentResponse = {
-  functionName: SegmentFunctionName
+  functionName: `${SegmentFunctionName}`
   params: Record<string, SegmentParamValue>
   requiresUnsignedCall: boolean
 }
