@@ -153,18 +153,21 @@ export type SwapAmountJSON = {
   paramTypes: SolidityFunctionParamType[]
 }
 
-export type SegmentFunctionName = 
-  'useBit' |
-  'marketSwapExactInput' |
-  'requireBitUsed' |
-  'requireBitNotUsed' |
-  'requireBlockNotMined' |
-  'requireBlockMined' |
-  'requireUint256LowerBound' |
-  'requireUint256UpperBound' |
-  'limitSwapExactInput' |
-  'blockInterval' |
-  'swap01'
+export enum SegmentFunctionNameValues {
+  useBit = 'useBit',
+  marketSwapExactInput = 'marketSwapExactInput',
+  requireBitUsed = 'requireBitUsed',
+  requireBitNotUsed = 'requireBitNotUsed',
+  requireBlockNotMined = 'requireBlockNotMined',
+  requireBlockMined = 'requireBlockMined',
+  requireUint256LowerBound = 'requireUint256LowerBound',
+  requireUint256UpperBound = 'requireUint256UpperBound',
+  limitSwapExactInput = 'limitSwapExactInput',
+  blockInterval = 'blockInterval',
+  swap01 = 'swap01'
+}
+
+export type SegmentFunctionName = `${SegmentFunctionNameValues}`;
 
 export type SegmentType =
   'swap' |
