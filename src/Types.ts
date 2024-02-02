@@ -392,7 +392,8 @@ export const invalidReasonMessages = {
   WRONG_NUMBER_OF_SWAPS: 'All intents must have exactly 1 swap',
   SIGNATURE_MISMATCH: 'Signer address does not match recovered address from signature',
   ACCOUNT_MISMATCH: 'Account address is not owned by signer',
-  HASH_MISMATCH: 'Hash does not match declaration data'
+  HASH_MISMATCH: 'Hash does not match declaration data',
+  VERIFY_TYPED_DATA_FAILED: 'Typed data verification failed',
 }
 
 export type TransactionData = {
