@@ -328,7 +328,7 @@ export type SignedDeclarationArgs = {
 export type SegmentJSON = {
   functionName: SegmentFunctionName
   params: Record<string, SegmentParamJSON>
-  data: string
+  data?: string
   requiresUnsignedCall: boolean
 }
 
@@ -341,11 +341,11 @@ export type DeclarationJSON = {
   beforeCalls: any[]
   afterCalls: any[]
   segmentsContract: string,
-  data: string
+  data?: string
 }
 
 export type SignedDeclarationJSON = {
-  eip712Data: EIP712TypedData
+  eip712Data?: EIP712TypedData
   account: string
   chainId: number
   signer: string
