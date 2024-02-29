@@ -135,8 +135,10 @@ export type Bit = {
 }
 
 export type SwapAmountContractName =
-  'FixedSwapAmount01' |
-  'BlockIntervalDutchAuctionAmount01'
+  | "FixedSwapAmount01"
+  | "BlockIntervalDutchAuctionAmount01"
+  | "BlockIntervalDutchAuctionAmount02"
+  | "DutchAuctionAmount01";
 
 export type SwapAmountArgs = {
   contractAddress?: string
@@ -259,20 +261,27 @@ export interface LimitSwapActionArgs extends ActionArgsBase {
   price?: number
 }
 
-export interface BlockIntervalDutchAuctionSwapActionArgs extends ActionArgsBase {
+interface DutchAuctionSwapArgsBase {
   owner: string
   tokenIn: string | TokenWithDecimalsArgs
   tokenOut: string | TokenWithDecimalsArgs
   tokenInAmount: BigIntish
-  intervalId: BigIntish
-  firstAuctionStartBlock: BigIntish
-  auctionInterval: BigIntish
   auctionDuration: BigIntish
   startPercent: number
   endPercent: number
-  maxAuctions?: BigIntish
   twapInterval?: BigIntish
   twapFeePool?: BigIntish
+}
+
+export interface DutchAuctionSwapActionArgs extends ActionArgsBase, DutchAuctionSwapArgsBase {
+  auctionStartBlock: BigIntish
+}
+
+export interface BlockIntervalDutchAuctionSwapActionArgs extends ActionArgsBase, DutchAuctionSwapArgsBase {
+  intervalId: BigIntish
+  firstAuctionStartBlock: BigIntish
+  auctionInterval: BigIntish
+  maxAuctions?: BigIntish
 }
 
 export type IntentReplay = {
