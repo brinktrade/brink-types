@@ -383,6 +383,8 @@ export type ValidationResult = {
   valid: boolean
   reason?: InvalidReason
   message?: string
+  signatureType?: `${SignatureType}`
+  eip1271ValidationCall?: TransactionData
 }
 
 export type InvalidReason = keyof typeof invalidReasonMessages
@@ -392,7 +394,8 @@ export const invalidReasonMessages = {
   WRONG_NUMBER_OF_SWAPS: 'All intents must have exactly 1 swap',
   SIGNATURE_MISMATCH: 'Signer address does not match recovered address from signature',
   ACCOUNT_MISMATCH: 'Account address is not owned by signer',
-  HASH_MISMATCH: 'Hash does not match declaration data'
+  HASH_MISMATCH: 'Hash does not match declaration data',
+  INVALID_SIGNATURE_TYPE: 'Signature type field does not match EIP712 or EIP1271',
 }
 
 export type TransactionData = {
